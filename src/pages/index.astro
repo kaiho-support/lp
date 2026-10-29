@@ -185,6 +185,9 @@ const jsonLd = {
       }
       table.profile th { width: 11em; font-weight: 500; letter-spacing: 0.12em; background: var(--paper); }
       @media (max-width: 640px) {
+        .sec-head { flex-wrap: wrap; row-gap: 0.2rem; }
+        .sec-head h2 { white-space: nowrap; }
+        .sec-head::after { flex-basis: 100%; }
         table.profile th, table.profile td { display: block; width: auto; }
         table.profile th { border-bottom: none; padding-bottom: 0.2rem; }
         table.profile td { border-top: none; padding-top: 0.2rem; }
@@ -230,13 +233,13 @@ const jsonLd = {
     <main id="main">
       <div class="hero" id="top">
         <div class="wrap">
-          <p class="label">Hachioji, Tokyo — Est. Antique Dealer</p>
+          <p class="label">Hachioji, Tokyo — Antique Dealer</p>
           <h1>八王子の古美術店<br />開豊ジャパン</h1>
           <p class="catch">『美術品取引をより身近に』</p>
           <p class="lead">
             設立以来変わらぬ思いで、家具、美術品、道具――カテゴリにとらわれることなく、美術品とお客様の取引を身近にするお手伝いをさせていただきます。
           </p>
-          <a class="btn" href={storeUrl} rel="noopener" target="_blank">出品一覧を見る（Yahoo!オークション）</a>
+          <a class="btn" href={storeUrl} rel="noopener" target="_blank">出品一覧を見る（<span style="white-space:nowrap">Yahoo!オークション</span>）</a>
         </div>
         <span class="hero-vert" aria-hidden="true">古美術・骨董</span>
       </div>
