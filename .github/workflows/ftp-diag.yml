@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Look for original index.html backups on server (read-only)
+      - name: List cleanup archive contents (read-only)
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
@@ -26,18 +26,11 @@ jobs:
             set net:max-retries 1;
             set net:timeout 25;
             open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER;
-            echo === archive ===;
-            cls -la archive;
-            echo === db_backup ===;
-            cls -la db_backup;
-            echo === work ===;
-            cls -la work;
-            echo === home lp dir ===;
-            cls -la lp;
-            echo === www assets ===;
-            cls -la www/assets;
+            echo === cleanup top ===;
+            cls -la archive/2026-10-22_cleanup;
+            echo === cleanup recursive ===;
+            find archive/2026-10-22_cleanup;
+            echo === www assets img ===;
             cls -la www/assets/img;
-            echo === htaccess ===;
-            cat www/.htaccess;
             bye;
           " || true
