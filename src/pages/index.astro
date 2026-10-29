@@ -1,6 +1,14 @@
 ---
+import { Image, getImage } from 'astro:assets';
+import heroChest from '../assets/hero-chest.webp';
+import itemMoonjar from '../assets/item-moonjar.webp';
+import itemTea from '../assets/item-tea.webp';
+
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const faviconUrl = `${base}favicon.svg`;
+
+const ogImage = await getImage({ src: heroChest, width: 1200, format: 'jpg' });
+const ogImageUrl = new URL(ogImage.src, 'https://kaihojpn.com').href;
 
 const company = {
   name: '株式会社 開豊ジャパン',
@@ -75,17 +83,22 @@ const jsonLd = {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content="https://kaihojpn.com/lp/" />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" type="image/svg+xml" href={faviconUrl} />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     <style>
       :root {
-        --ink: #1c1c1a;
-        --ink-soft: #4a4a46;
-        --paper: #f6f4ef;
-        --white: #fdfcf9;
-        --line: #d9d5cb;
-        --line-dark: #b9b4a6;
+        --ink: #1d1d1b;
+        --ink-soft: #55534d;
+        --paper: #f5f3ee;
+        --white: #fcfbf7;
+        --line: #dbd7cc;
+        --line-dark: #b7b2a4;
+        --night: #101010;
+        --night-2: #171716;
+        --moon: #ece8df;
+        --moon-soft: #a49e90;
       }
       * { box-sizing: border-box; }
       html { scroll-behavior: smooth; }
@@ -93,98 +106,137 @@ const jsonLd = {
         margin: 0;
         color: var(--ink);
         background: var(--paper);
-        font-family: "Hiragino Mincho ProN", "Hiragino Mincho Pro", "YuMincho", "Yu Mincho", "Noto Serif JP", serif;
+        font-family: "Didot", "Bodoni MT", "Bodoni 72",
+          "Hiragino Mincho ProN", "Hiragino Mincho Pro",
+          "YuMincho", "Yu Mincho",
+          "Noto Serif CJK JP", "Noto Serif JP", "MS PMincho", serif;
         font-size: 16px;
-        line-height: 1.9;
+        line-height: 1.95;
         letter-spacing: 0.04em;
         -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
       }
+      h1, h2, .catch, .store-name { font-feature-settings: "palt"; }
       a { color: inherit; }
-      a:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+      a:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+      img { display: block; max-width: 100%; height: auto; }
       .skip {
-        position: absolute; left: -9999px; top: 0;
-        background: var(--ink); color: var(--white); padding: 0.5rem 1rem; z-index: 10;
+        position: absolute; left: -9999px; top: 0; z-index: 20;
+        background: var(--moon); color: var(--night); padding: 0.5rem 1rem;
       }
       .skip:focus { left: 0; }
-      .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+      .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+      .en {
+        font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans",
+          "Yu Gothic UI", "YuGothic", "Noto Sans CJK JP", sans-serif;
+        text-transform: uppercase;
+      }
+      .num { font-variant-numeric: tabular-nums; }
 
+      /* ---------- dark header ---------- */
       header {
-        position: sticky; top: 0; z-index: 5;
-        background: color-mix(in srgb, var(--paper) 92%, transparent);
-        backdrop-filter: blur(6px);
-        border-bottom: 1px solid var(--line);
+        position: sticky; top: 0; z-index: 10;
+        background: color-mix(in srgb, var(--night) 94%, transparent);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid #2b2b29;
+        color: var(--moon);
       }
       .header-in {
         display: flex; align-items: baseline; justify-content: space-between;
-        gap: 1rem; padding-top: 14px; padding-bottom: 14px;
+        gap: 1rem; padding-top: 15px; padding-bottom: 15px;
       }
-      .brand { text-decoration: none; display: flex; align-items: baseline; gap: 0.7rem; }
-      .brand .brand-name { font-size: 1.25rem; letter-spacing: 0.18em; }
-      .brand .brand-sub {
-        font-family: "Hiragino Kaku Gothic ProN", sans-serif;
-        font-size: 0.62rem; letter-spacing: 0.32em; color: var(--ink-soft); text-transform: uppercase;
-      }
-      nav ul { display: flex; gap: 1.6rem; list-style: none; margin: 0; padding: 0; }
-      nav a {
-        text-decoration: none; font-size: 0.86rem; letter-spacing: 0.14em; color: var(--ink-soft);
-      }
-      nav a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 5px; }
-      @media (max-width: 720px) { nav { display: none; } }
+      .brand { text-decoration: none; display: flex; align-items: baseline; gap: 0.75rem; }
+      .brand-name { font-size: 1.22rem; letter-spacing: 0.2em; }
+      .brand-sub { font-size: 0.6rem; letter-spacing: 0.34em; color: var(--moon-soft); }
+      nav ul { display: flex; gap: 1.7rem; list-style: none; margin: 0; padding: 0; }
+      nav a { text-decoration: none; font-size: 0.85rem; letter-spacing: 0.14em; color: #cfcabe; }
+      nav a:hover { color: #fff; text-decoration: underline; text-underline-offset: 5px; }
+      @media (max-width: 760px) { nav { display: none; } }
 
-      .hero { padding: 110px 0 90px; border-bottom: 1px solid var(--line); position: relative; }
-      .hero .label {
-        font-family: "Hiragino Kaku Gothic ProN", sans-serif;
-        font-size: 0.68rem; letter-spacing: 0.4em; color: var(--ink-soft); text-transform: uppercase;
-        margin: 0 0 2.2rem;
+      /* ---------- hero (dark gallery) ---------- */
+      .hero { background: var(--night); color: var(--moon); }
+      .hero figure { margin: 0; }
+      .hero figure img { width: 100%; }
+      .hero-body { text-align: center; padding: 74px 24px 88px; }
+      .hero .label { font-size: 0.66rem; letter-spacing: 0.44em; color: var(--moon-soft); margin: 0 0 2rem; }
+      .hero h1 {
+        font-size: clamp(2rem, 5.6vw, 3.4rem); font-weight: 500;
+        line-height: 1.55; letter-spacing: 0.1em; margin: 0 0 1.5rem; color: #f4f1ea;
       }
-      .hero h1 { font-size: clamp(1.9rem, 5vw, 3.1rem); font-weight: 500; line-height: 1.5; margin: 0 0 1.6rem; letter-spacing: 0.08em; }
-      .hero .catch { font-size: clamp(1.15rem, 2.6vw, 1.5rem); margin: 0 0 1.4rem; }
-      .hero .lead { max-width: 38em; color: var(--ink-soft); margin: 0 0 2.6rem; }
-      .hero-vert {
-        position: absolute; right: 24px; top: 110px;
-        writing-mode: vertical-rl; font-size: 0.8rem; letter-spacing: 0.5em; color: var(--line-dark);
-      }
-      @media (max-width: 720px) { .hero-vert { display: none; } .hero { padding: 70px 0 60px; } }
+      .hero .catch { font-size: clamp(1.12rem, 2.6vw, 1.45rem); letter-spacing: 0.12em; margin: 0 0 1.3rem; }
+      .hero .lead { max-width: 37em; margin: 0 auto 2.8rem; color: #c9c4b6; font-size: 0.98rem; }
+      .hero .rule { width: 56px; border: none; border-top: 1px solid #3d3d3a; margin: 0 auto 2.6rem; }
 
       .btn {
-        display: inline-block; text-decoration: none;
-        border: 1px solid var(--ink); padding: 0.85rem 2.2rem;
-        font-size: 0.9rem; letter-spacing: 0.16em; background: var(--ink); color: var(--white);
-        transition: background 0.2s, color 0.2s;
+        display: inline-block; text-decoration: none; cursor: pointer;
+        padding: 0.9rem 2.4rem; font-size: 0.9rem; letter-spacing: 0.16em;
+        border: 1px solid var(--ink); background: var(--ink); color: var(--white);
+        transition: background 0.25s, color 0.25s, border-color 0.25s;
       }
       .btn:hover { background: transparent; color: var(--ink); }
+      .btn.on-dark { border-color: var(--moon); background: var(--moon); color: var(--night); }
+      .btn.on-dark:hover { background: transparent; color: var(--moon); }
       .btn.ghost { background: transparent; color: var(--ink); }
       .btn.ghost:hover { background: var(--ink); color: var(--white); }
 
-      section { padding: 84px 0; border-bottom: 1px solid var(--line); }
+      /* ---------- light sections ---------- */
+      section { padding: 88px 0; border-bottom: 1px solid var(--line); }
       section.alt { background: var(--white); }
-      .sec-head { display: flex; align-items: baseline; gap: 1.4rem; margin-bottom: 2.6rem; }
-      .sec-head .en {
-        font-family: "Hiragino Kaku Gothic ProN", sans-serif;
-        font-size: 0.66rem; letter-spacing: 0.4em; color: var(--ink-soft); text-transform: uppercase;
-      }
+      .sec-head { display: flex; align-items: baseline; gap: 1.4rem; margin-bottom: 2.8rem; }
+      .sec-head .en { font-size: 0.64rem; letter-spacing: 0.4em; color: var(--ink-soft); }
       .sec-head h2 { font-size: 1.55rem; font-weight: 500; letter-spacing: 0.12em; margin: 0; }
       .sec-head::after { content: ""; flex: 1; border-top: 1px solid var(--line); transform: translateY(-4px); }
       .body-text { max-width: 40em; color: var(--ink-soft); }
       .body-text p { margin: 0 0 1.2em; }
-
-      .items { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 0; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
-      .items li {
-        border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);
-        padding: 1.1rem 1.2rem; font-size: 0.98rem; letter-spacing: 0.1em; background: var(--white);
+      figure.photo { margin: 0; }
+      figure.photo figcaption {
+        font-size: 0.72rem; letter-spacing: 0.22em; color: var(--ink-soft); padding-top: 0.7rem;
       }
 
-      .store-card { border: 1px solid var(--line-dark); background: var(--paper); padding: 2.2rem; display: grid; gap: 0.6rem; }
-      .store-card .store-name { font-size: 1.4rem; letter-spacing: 0.14em; }
-      .store-card p { margin: 0; color: var(--ink-soft); max-width: 42em; }
-      .store-card .btn { justify-self: start; margin-top: 1rem; }
+      .items-layout { display: grid; grid-template-columns: 1fr 400px; gap: 3.2rem; align-items: start; }
+      @media (max-width: 860px) { .items-layout { grid-template-columns: 1fr; } }
+      .items { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line-dark); }
+      .items li {
+        display: flex; align-items: baseline; gap: 1.3rem;
+        padding: 0.95rem 0.2rem; border-bottom: 1px solid var(--line);
+        font-size: 1.02rem; letter-spacing: 0.12em;
+      }
+      .items .idx {
+        font-family: "Didot", "Bodoni MT", "Bodoni 72", "Hiragino Mincho ProN", serif;
+        font-size: 0.95rem; color: var(--ink-soft); min-width: 2em;
+      }
+
+      .shop-layout { display: grid; grid-template-columns: 400px 1fr; gap: 3.2rem; align-items: center; }
+      @media (max-width: 860px) { .shop-layout { grid-template-columns: 1fr; } }
+      .store-name { font-size: 1.65rem; letter-spacing: 0.14em; margin: 0 0 1rem; font-weight: 500; }
+      .shop-layout .body-text { margin-bottom: 2rem; }
 
       table.profile { width: 100%; border-collapse: collapse; background: var(--white); }
       table.profile th, table.profile td {
-        border: 1px solid var(--line); padding: 1rem 1.2rem; text-align: left; vertical-align: top; font-size: 0.95rem;
+        border: 1px solid var(--line); padding: 1.05rem 1.25rem;
+        text-align: left; vertical-align: top; font-size: 0.96rem;
       }
       table.profile th { width: 11em; font-weight: 500; letter-spacing: 0.12em; background: var(--paper); }
+      table.profile a:hover { text-underline-offset: 4px; }
+
+      .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; margin-top: 2.2rem; }
+      .contact-card { border: 1px solid var(--line); background: var(--white); padding: 1.8rem; }
+      .contact-card .k { font-size: 0.62rem; letter-spacing: 0.36em; color: var(--ink-soft); margin: 0 0 0.6rem; }
+      .contact-card .v { font-size: 1.3rem; letter-spacing: 0.06em; margin: 0; }
+      .contact-card .v a { text-decoration: none; }
+      .contact-card .v a:hover { text-decoration: underline; text-underline-offset: 5px; }
+      .note { color: var(--ink-soft); font-size: 0.88rem; margin-top: 1.6rem; }
+
+      /* ---------- dark footer ---------- */
+      footer { background: var(--night); color: var(--moon); padding: 58px 0 64px; }
+      .footer-in { display: flex; flex-wrap: wrap; gap: 0.8rem 2.6rem; justify-content: space-between; align-items: baseline; }
+      footer .fname { letter-spacing: 0.2em; font-size: 1.05rem; }
+      footer small { color: var(--moon-soft); letter-spacing: 0.05em; }
+
       @media (max-width: 640px) {
+        section { padding: 64px 0; }
+        .hero figure img { height: 54vh; object-fit: cover; object-position: center; }
+        .hero-body { padding: 54px 20px 64px; }
         .sec-head { flex-wrap: wrap; row-gap: 0.2rem; }
         .sec-head h2 { white-space: nowrap; }
         .sec-head::after { flex-basis: 100%; }
@@ -192,22 +244,6 @@ const jsonLd = {
         table.profile th { border-bottom: none; padding-bottom: 0.2rem; }
         table.profile td { border-top: none; padding-top: 0.2rem; }
       }
-
-      .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
-      .contact-card { border: 1px solid var(--line); background: var(--white); padding: 1.8rem; }
-      .contact-card .k {
-        font-family: "Hiragino Kaku Gothic ProN", sans-serif;
-        font-size: 0.64rem; letter-spacing: 0.36em; color: var(--ink-soft); text-transform: uppercase; margin: 0 0 0.6rem;
-      }
-      .contact-card .v { font-size: 1.25rem; letter-spacing: 0.08em; margin: 0; }
-      .contact-card .v a { text-decoration: none; }
-      .contact-card .v a:hover { text-decoration: underline; text-underline-offset: 5px; }
-      .note { color: var(--ink-soft); font-size: 0.88rem; margin-top: 1.6rem; }
-
-      footer { padding: 48px 0 56px; }
-      .footer-in { display: flex; flex-wrap: wrap; gap: 1rem 2.4rem; justify-content: space-between; align-items: baseline; }
-      footer .fname { letter-spacing: 0.18em; }
-      footer small { color: var(--ink-soft); letter-spacing: 0.06em; }
     </style>
   </head>
   <body>
@@ -216,7 +252,7 @@ const jsonLd = {
       <div class="wrap header-in">
         <a class="brand" href="#top" aria-label="開豊ジャパン トップへ">
           <span class="brand-name">開豊ジャパン</span>
-          <span class="brand-sub">Antique Store</span>
+          <span class="brand-sub en">Antique Store</span>
         </a>
         <nav aria-label="ページ内案内">
           <ul>
@@ -232,16 +268,26 @@ const jsonLd = {
 
     <main id="main">
       <div class="hero" id="top">
-        <div class="wrap">
-          <p class="label">Hachioji, Tokyo — Antique Dealer</p>
+        <figure>
+          <Image
+            src={heroChest}
+            alt="暗い展示室でスポットライトを受ける李朝の木製箪笥"
+            widths={[828, 1200, 1920, 2352]}
+            sizes="100vw"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </figure>
+        <div class="hero-body">
+          <p class="label en">Hachioji, Tokyo — Antique Dealer</p>
           <h1>八王子の古美術店<br />開豊ジャパン</h1>
+          <hr class="rule" />
           <p class="catch">『美術品取引をより身近に』</p>
           <p class="lead">
             設立以来変わらぬ思いで、家具、美術品、道具――カテゴリにとらわれることなく、美術品とお客様の取引を身近にするお手伝いをさせていただきます。
           </p>
-          <a class="btn" href={storeUrl} rel="noopener" target="_blank">出品一覧を見る（<span style="white-space:nowrap">Yahoo!オークション</span>）</a>
+          <a class="btn on-dark" href={storeUrl} rel="noopener" target="_blank">出品一覧を見る（<span style="white-space:nowrap">Yahoo!オークション</span>）</a>
         </div>
-        <span class="hero-vert" aria-hidden="true">古美術・骨董</span>
       </div>
 
       <section id="items" aria-labelledby="items-h">
@@ -250,12 +296,33 @@ const jsonLd = {
             <span class="en">Items</span>
             <h2 id="items-h">取扱品目</h2>
           </div>
-          <div class="body-text">
-            <p>ジャンルにとらわれず、新たな価値を見出し、提供します。</p>
+          <div class="items-layout">
+            <div>
+              <div class="body-text">
+                <p>ジャンルにとらわれず、新たな価値を見出し、提供します。</p>
+              </div>
+              <ol class="items">
+                {
+                  items.map((name, i) => (
+                    <li>
+                      <span class="idx num">{String(i + 1).padStart(2, '0')}</span>
+                      {name}
+                    </li>
+                  ))
+                }
+              </ol>
+            </div>
+            <figure class="photo">
+              <Image
+                src={itemMoonjar}
+                alt="台座の上に置かれた李朝白磁の大壺"
+                widths={[480, 800, 1200]}
+                sizes="(max-width: 860px) 100vw, 400px"
+                loading="lazy"
+              />
+              <figcaption>李朝白磁</figcaption>
+            </figure>
           </div>
-          <ul class="items">
-            {items.map((name) => <li>{name}</li>)}
-          </ul>
         </div>
       </section>
 
@@ -265,13 +332,25 @@ const jsonLd = {
             <span class="en">Shop</span>
             <h2 id="shop-h">オンラインショップ</h2>
           </div>
-          <div class="body-text">
-            <p>最良の美術品を、より身近な方法でお届けします。商品はYahoo!オークションで販売しています。</p>
-          </div>
-          <div class="store-card">
-            <span class="store-name">{company.storeName}</span>
-            <p>李朝家具、古美術品、雑貨などを出品しています。出品中の商品は、Yahoo!オークションの出品一覧からご覧いただけます。</p>
-            <a class="btn ghost" href={storeUrl} rel="noopener" target="_blank">Galleria 李朝の出品一覧</a>
+          <div class="shop-layout">
+            <figure class="photo">
+              <Image
+                src={itemTea}
+                alt="木の盆に置かれた茶碗、茶筅と鉄瓶"
+                widths={[480, 800, 1200]}
+                sizes="(max-width: 860px) 100vw, 400px"
+                loading="lazy"
+              />
+              <figcaption>茶道具</figcaption>
+            </figure>
+            <div>
+              <h3 class="store-name">{company.storeName}</h3>
+              <div class="body-text">
+                <p>最良の美術品を、より身近な方法でお届けします。商品はYahoo!オークションで販売しています。</p>
+                <p>李朝家具、古美術品、雑貨などを出品しています。出品中の商品は、出品一覧からご覧いただけます。</p>
+              </div>
+              <a class="btn" href={storeUrl} rel="noopener" target="_blank">Galleria 李朝の出品一覧</a>
+            </div>
           </div>
         </div>
       </section>
@@ -287,9 +366,9 @@ const jsonLd = {
               <tr><th scope="row">社名</th><td>{company.name}</td></tr>
               <tr><th scope="row">代表取締役</th><td>{company.representative}</td></tr>
               <tr><th scope="row">所在地</th><td>〒{company.postalCode} {company.address}</td></tr>
-              <tr><th scope="row">電話番号</th><td><a href={company.telLink}>{company.telDisplay}</a></td></tr>
+              <tr><th scope="row">電話番号</th><td><a class="num" href={company.telLink}>{company.telDisplay}</a></td></tr>
               <tr><th scope="row">メール</th><td><a href={`mailto:${company.email}`}>{company.email}</a></td></tr>
-              <tr><th scope="row">営業時間</th><td>{company.hours}（休業日：{company.closed}）</td></tr>
+              <tr><th scope="row">営業時間</th><td><span class="num">{company.hours}</span>（休業日：{company.closed}）</td></tr>
               <tr><th scope="row">古物商許可</th><td>{company.license}</td></tr>
             </tbody>
           </table>
@@ -320,16 +399,16 @@ const jsonLd = {
           </div>
           <div class="contact-grid">
             <div class="contact-card">
-              <p class="k">Phone</p>
-              <p class="v"><a href={company.telLink}>{company.telDisplay}</a></p>
+              <p class="k en">Phone</p>
+              <p class="v num"><a href={company.telLink}>{company.telDisplay}</a></p>
             </div>
             <div class="contact-card">
-              <p class="k">Email</p>
+              <p class="k en">Email</p>
               <p class="v"><a href={`mailto:${company.email}`}>{company.email}</a></p>
             </div>
             <!-- TODO: 先方作成のGoogleフォームURLが届いたら、ここにフォームへのボタンを追加する -->
           </div>
-          <p class="note">営業時間 {company.hours}／休業日 {company.closed}</p>
+          <p class="note">営業時間 <span class="num">{company.hours}</span>／休業日 {company.closed}</p>
         </div>
       </section>
     </main>
@@ -337,7 +416,7 @@ const jsonLd = {
     <footer>
       <div class="wrap footer-in">
         <span class="fname">開豊ジャパン</span>
-        <small>〒{company.postalCode} {company.address} ／ {company.telDisplay}</small>
+        <small>〒{company.postalCode} {company.address} ／ <span class="num">{company.telDisplay}</span></small>
         <small>© {company.name}</small>
       </div>
     </footer>
