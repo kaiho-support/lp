@@ -26,11 +26,11 @@ jobs:
             set net:max-retries 2;
             set net:timeout 30;
             open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER;
-            -rm -f www/lp;
-            -rm -rf www/_astro;
-            -rm -f www/favicon.svg;
-            -rm -f www/.ftp-deploy-sync-state.json;
-            -rm -rf lp;
+            rm -f www/lp;
+            rm -rf www/_astro;
+            rm -f www/favicon.svg;
+            rm -f www/.ftp-deploy-sync-state.json;
+            rm -rf lp;
             mkdir -p www/lp;
             echo === www root after fix ===;
             cls -la www;
