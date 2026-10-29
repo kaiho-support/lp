@@ -1,0 +1,49 @@
+name: Deploy to Sakura
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# FTP認証情報は使わない（読み取りのみ）
+permissions:
+  contents: read
+
+# デプロイの同時実行を防ぐ（途中キャンセルはしない）
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      # さくらレンタルサーバ ~/www/lp/ へ FTPS で転送する。
+      # dangerous-clean-slate を使わないため、LPフォルダ外の既存ファイル
+      # （現行サイトや /inventories/ 等）は削除されない。
+      - name: Deploy via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@8e83cea8672e3fbcbb9fdafff34debf6ae4c5f65 # v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./dist/
+          server-dir: www/lp/
+          log-level: standard

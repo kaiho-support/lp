@@ -1,0 +1,342 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const faviconUrl = `${base}favicon.svg`;
+
+const company = {
+  name: '株式会社 開豊ジャパン',
+  storeName: 'Galleria 李朝',
+  representative: '金 載文',
+  postalCode: '193-0935',
+  address: '東京都八王子市大船町142-6',
+  telDisplay: '042-667-7005',
+  telLink: 'tel:+81426677005',
+  email: 'info@kaihojpn.com',
+  hours: '10:00〜17:00',
+  closed: '土・日・祝日',
+  license: '東京都公安委員会 第308770205133号（古物商許可証）',
+};
+
+const items = [
+  '東洋美術',
+  '西洋美術',
+  '日本陶磁器',
+  '中国陶磁器',
+  '茶道具',
+  '花道具',
+  '諸道具',
+  '掛軸',
+  '絵画',
+  '美術装飾品',
+  'その他美術品',
+];
+
+const storeUrl = 'https://auctions.yahoo.co.jp/seller/2TBbYXSSF6rHaqSv7EVuJg1R9X8gD';
+const mapsUrl =
+  'https://www.google.com/maps/search/?api=1&query=%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E9%96%8B%E8%B1%8A%E3%82%B8%E3%83%A3%E3%83%91%E3%83%B3%20%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%85%AB%E7%8E%8B%E5%AD%90%E5%B8%82%E5%A4%A7%E8%88%B9%E7%94%BA142-6';
+
+const title = '開豊ジャパン｜八王子の古美術店';
+const description =
+  '東京都八王子市の古美術店、株式会社開豊ジャパン。李朝家具をはじめ東洋美術・陶磁器・茶道具などを取り扱い、Yahoo!オークションストア「Galleria 李朝」で販売しています。会社概要と取扱品目のご案内です。';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'AntiqueStore',
+  name: company.name,
+  url: 'https://kaihojpn.com/lp/',
+  telephone: '+81-42-667-7005',
+  email: company.email,
+  address: {
+    '@type': 'PostalAddress',
+    postalCode: company.postalCode,
+    addressRegion: '東京都',
+    addressLocality: '八王子市',
+    streetAddress: '大船町142-6',
+    addressCountry: 'JP',
+  },
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    opens: '10:00',
+    closes: '17:00',
+  },
+};
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href="https://kaihojpn.com/lp/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content="https://kaihojpn.com/lp/" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" type="image/svg+xml" href={faviconUrl} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <style>
+      :root {
+        --ink: #1c1c1a;
+        --ink-soft: #4a4a46;
+        --paper: #f6f4ef;
+        --white: #fdfcf9;
+        --line: #d9d5cb;
+        --line-dark: #b9b4a6;
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font-family: "Hiragino Mincho ProN", "Hiragino Mincho Pro", "YuMincho", "Yu Mincho", "Noto Serif JP", serif;
+        font-size: 16px;
+        line-height: 1.9;
+        letter-spacing: 0.04em;
+        -webkit-font-smoothing: antialiased;
+      }
+      a { color: inherit; }
+      a:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+      .skip {
+        position: absolute; left: -9999px; top: 0;
+        background: var(--ink); color: var(--white); padding: 0.5rem 1rem; z-index: 10;
+      }
+      .skip:focus { left: 0; }
+      .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+
+      header {
+        position: sticky; top: 0; z-index: 5;
+        background: color-mix(in srgb, var(--paper) 92%, transparent);
+        backdrop-filter: blur(6px);
+        border-bottom: 1px solid var(--line);
+      }
+      .header-in {
+        display: flex; align-items: baseline; justify-content: space-between;
+        gap: 1rem; padding-top: 14px; padding-bottom: 14px;
+      }
+      .brand { text-decoration: none; display: flex; align-items: baseline; gap: 0.7rem; }
+      .brand .brand-name { font-size: 1.25rem; letter-spacing: 0.18em; }
+      .brand .brand-sub {
+        font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+        font-size: 0.62rem; letter-spacing: 0.32em; color: var(--ink-soft); text-transform: uppercase;
+      }
+      nav ul { display: flex; gap: 1.6rem; list-style: none; margin: 0; padding: 0; }
+      nav a {
+        text-decoration: none; font-size: 0.86rem; letter-spacing: 0.14em; color: var(--ink-soft);
+      }
+      nav a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 5px; }
+      @media (max-width: 720px) { nav { display: none; } }
+
+      .hero { padding: 110px 0 90px; border-bottom: 1px solid var(--line); position: relative; }
+      .hero .label {
+        font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+        font-size: 0.68rem; letter-spacing: 0.4em; color: var(--ink-soft); text-transform: uppercase;
+        margin: 0 0 2.2rem;
+      }
+      .hero h1 { font-size: clamp(1.9rem, 5vw, 3.1rem); font-weight: 500; line-height: 1.5; margin: 0 0 1.6rem; letter-spacing: 0.08em; }
+      .hero .catch { font-size: clamp(1.15rem, 2.6vw, 1.5rem); margin: 0 0 1.4rem; }
+      .hero .lead { max-width: 38em; color: var(--ink-soft); margin: 0 0 2.6rem; }
+      .hero-vert {
+        position: absolute; right: 24px; top: 110px;
+        writing-mode: vertical-rl; font-size: 0.8rem; letter-spacing: 0.5em; color: var(--line-dark);
+      }
+      @media (max-width: 720px) { .hero-vert { display: none; } .hero { padding: 70px 0 60px; } }
+
+      .btn {
+        display: inline-block; text-decoration: none;
+        border: 1px solid var(--ink); padding: 0.85rem 2.2rem;
+        font-size: 0.9rem; letter-spacing: 0.16em; background: var(--ink); color: var(--white);
+        transition: background 0.2s, color 0.2s;
+      }
+      .btn:hover { background: transparent; color: var(--ink); }
+      .btn.ghost { background: transparent; color: var(--ink); }
+      .btn.ghost:hover { background: var(--ink); color: var(--white); }
+
+      section { padding: 84px 0; border-bottom: 1px solid var(--line); }
+      section.alt { background: var(--white); }
+      .sec-head { display: flex; align-items: baseline; gap: 1.4rem; margin-bottom: 2.6rem; }
+      .sec-head .en {
+        font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+        font-size: 0.66rem; letter-spacing: 0.4em; color: var(--ink-soft); text-transform: uppercase;
+      }
+      .sec-head h2 { font-size: 1.55rem; font-weight: 500; letter-spacing: 0.12em; margin: 0; }
+      .sec-head::after { content: ""; flex: 1; border-top: 1px solid var(--line); transform: translateY(-4px); }
+      .body-text { max-width: 40em; color: var(--ink-soft); }
+      .body-text p { margin: 0 0 1.2em; }
+
+      .items { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 0; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+      .items li {
+        border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);
+        padding: 1.1rem 1.2rem; font-size: 0.98rem; letter-spacing: 0.1em; background: var(--white);
+      }
+
+      .store-card { border: 1px solid var(--line-dark); background: var(--paper); padding: 2.2rem; display: grid; gap: 0.6rem; }
+      .store-card .store-name { font-size: 1.4rem; letter-spacing: 0.14em; }
+      .store-card p { margin: 0; color: var(--ink-soft); max-width: 42em; }
+      .store-card .btn { justify-self: start; margin-top: 1rem; }
+
+      table.profile { width: 100%; border-collapse: collapse; background: var(--white); }
+      table.profile th, table.profile td {
+        border: 1px solid var(--line); padding: 1rem 1.2rem; text-align: left; vertical-align: top; font-size: 0.95rem;
+      }
+      table.profile th { width: 11em; font-weight: 500; letter-spacing: 0.12em; background: var(--paper); }
+      @media (max-width: 640px) {
+        table.profile th, table.profile td { display: block; width: auto; }
+        table.profile th { border-bottom: none; padding-bottom: 0.2rem; }
+        table.profile td { border-top: none; padding-top: 0.2rem; }
+      }
+
+      .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
+      .contact-card { border: 1px solid var(--line); background: var(--white); padding: 1.8rem; }
+      .contact-card .k {
+        font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+        font-size: 0.64rem; letter-spacing: 0.36em; color: var(--ink-soft); text-transform: uppercase; margin: 0 0 0.6rem;
+      }
+      .contact-card .v { font-size: 1.25rem; letter-spacing: 0.08em; margin: 0; }
+      .contact-card .v a { text-decoration: none; }
+      .contact-card .v a:hover { text-decoration: underline; text-underline-offset: 5px; }
+      .note { color: var(--ink-soft); font-size: 0.88rem; margin-top: 1.6rem; }
+
+      footer { padding: 48px 0 56px; }
+      .footer-in { display: flex; flex-wrap: wrap; gap: 1rem 2.4rem; justify-content: space-between; align-items: baseline; }
+      footer .fname { letter-spacing: 0.18em; }
+      footer small { color: var(--ink-soft); letter-spacing: 0.06em; }
+    </style>
+  </head>
+  <body>
+    <a class="skip" href="#main">本文へ移動</a>
+    <header>
+      <div class="wrap header-in">
+        <a class="brand" href="#top" aria-label="開豊ジャパン トップへ">
+          <span class="brand-name">開豊ジャパン</span>
+          <span class="brand-sub">Antique Store</span>
+        </a>
+        <nav aria-label="ページ内案内">
+          <ul>
+            <li><a href="#items">取扱品目</a></li>
+            <li><a href="#shop">ショップ</a></li>
+            <li><a href="#company">会社概要</a></li>
+            <li><a href="#access">アクセス</a></li>
+            <li><a href="#contact">お問い合わせ</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <div class="hero" id="top">
+        <div class="wrap">
+          <p class="label">Hachioji, Tokyo — Est. Antique Dealer</p>
+          <h1>八王子の古美術店<br />開豊ジャパン</h1>
+          <p class="catch">『美術品取引をより身近に』</p>
+          <p class="lead">
+            設立以来変わらぬ思いで、家具、美術品、道具――カテゴリにとらわれることなく、美術品とお客様の取引を身近にするお手伝いをさせていただきます。
+          </p>
+          <a class="btn" href={storeUrl} rel="noopener" target="_blank">出品一覧を見る（Yahoo!オークション）</a>
+        </div>
+        <span class="hero-vert" aria-hidden="true">古美術・骨董</span>
+      </div>
+
+      <section id="items" aria-labelledby="items-h">
+        <div class="wrap">
+          <div class="sec-head">
+            <span class="en">Items</span>
+            <h2 id="items-h">取扱品目</h2>
+          </div>
+          <div class="body-text">
+            <p>ジャンルにとらわれず、新たな価値を見出し、提供します。</p>
+          </div>
+          <ul class="items">
+            {items.map((name) => <li>{name}</li>)}
+          </ul>
+        </div>
+      </section>
+
+      <section id="shop" class="alt" aria-labelledby="shop-h">
+        <div class="wrap">
+          <div class="sec-head">
+            <span class="en">Shop</span>
+            <h2 id="shop-h">オンラインショップ</h2>
+          </div>
+          <div class="body-text">
+            <p>最良の美術品を、より身近な方法でお届けします。商品はYahoo!オークションで販売しています。</p>
+          </div>
+          <div class="store-card">
+            <span class="store-name">{company.storeName}</span>
+            <p>李朝家具、古美術品、雑貨などを出品しています。出品中の商品は、Yahoo!オークションの出品一覧からご覧いただけます。</p>
+            <a class="btn ghost" href={storeUrl} rel="noopener" target="_blank">Galleria 李朝の出品一覧</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="company" aria-labelledby="company-h">
+        <div class="wrap">
+          <div class="sec-head">
+            <span class="en">About us</span>
+            <h2 id="company-h">会社概要</h2>
+          </div>
+          <table class="profile">
+            <tbody>
+              <tr><th scope="row">社名</th><td>{company.name}</td></tr>
+              <tr><th scope="row">代表取締役</th><td>{company.representative}</td></tr>
+              <tr><th scope="row">所在地</th><td>〒{company.postalCode} {company.address}</td></tr>
+              <tr><th scope="row">電話番号</th><td><a href={company.telLink}>{company.telDisplay}</a></td></tr>
+              <tr><th scope="row">メール</th><td><a href={`mailto:${company.email}`}>{company.email}</a></td></tr>
+              <tr><th scope="row">営業時間</th><td>{company.hours}（休業日：{company.closed}）</td></tr>
+              <tr><th scope="row">古物商許可</th><td>{company.license}</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="access" class="alt" aria-labelledby="access-h">
+        <div class="wrap">
+          <div class="sec-head">
+            <span class="en">Access</span>
+            <h2 id="access-h">アクセス</h2>
+          </div>
+          <div class="body-text">
+            <p>〒{company.postalCode} {company.address}</p>
+          </div>
+          <a class="btn ghost" href={mapsUrl} rel="noopener" target="_blank">Googleマップで開く</a>
+        </div>
+      </section>
+
+      <section id="contact" aria-labelledby="contact-h">
+        <div class="wrap">
+          <div class="sec-head">
+            <span class="en">Contact</span>
+            <h2 id="contact-h">お問い合わせ</h2>
+          </div>
+          <div class="body-text">
+            <p>取扱商品、商品の受取りなどについて、お気軽にお問い合わせください。お品物の画像をお送りいただく場合は、メールに添付してください。</p>
+          </div>
+          <div class="contact-grid">
+            <div class="contact-card">
+              <p class="k">Phone</p>
+              <p class="v"><a href={company.telLink}>{company.telDisplay}</a></p>
+            </div>
+            <div class="contact-card">
+              <p class="k">Email</p>
+              <p class="v"><a href={`mailto:${company.email}`}>{company.email}</a></p>
+            </div>
+            <!-- TODO: 先方作成のGoogleフォームURLが届いたら、ここにフォームへのボタンを追加する -->
+          </div>
+          <p class="note">営業時間 {company.hours}／休業日 {company.closed}</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap footer-in">
+        <span class="fname">開豊ジャパン</span>
+        <small>〒{company.postalCode} {company.address} ／ {company.telDisplay}</small>
+        <small>© {company.name}</small>
+      </div>
+    </footer>
+  </body>
+</html>
