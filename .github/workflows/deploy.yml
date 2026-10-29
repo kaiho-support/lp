@@ -71,3 +71,17 @@ jobs:
             cls -la www/lp;
             bye;
           "
+
+      # 転送後に公開URLを実際に取得して、中身がLPであることを確認する。
+      # 2026-10-30 の事故（転送先ずれ＋成功扱い）の再発防止。
+      - name: Verify live page
+        run: |
+          for i in 1 2 3 4 5; do
+            if curl -fsS --max-time 30 https://kaihojpn.com/lp/ -o /tmp/lp-check.html; then break; fi
+            sleep 10
+          done
+          grep -q "開豊ジャパン" /tmp/lp-check.html
+          grep -q "第308770205133号" /tmp/lp-check.html
+          CSS=$(grep -o '/lp/_astro/[^"]*\.css' /tmp/lp-check.html | head -1)
+          curl -fsS -o /dev/null --max-time 30 "https://kaihojpn.com$CSS"
+          echo "Live check OK: /lp/ serves the LP and its CSS."
