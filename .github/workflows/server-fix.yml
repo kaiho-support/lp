@@ -1,0 +1,40 @@
+name: Server fix (temporary, incident recovery)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Remove blocking file and stray uploads, create www/lp
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          sudo apt-get install -y lftp >/dev/null 2>&1 || true
+          lftp -e "
+            set ssl:verify-certificate no;
+            set ftp:ssl-force yes;
+            set ftp:ssl-protect-data yes;
+            set dns:order inet;
+            set net:max-retries 2;
+            set net:timeout 30;
+            open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER;
+            -rm -f www/lp;
+            -rm -rf www/_astro;
+            -rm -f www/favicon.svg;
+            -rm -f www/.ftp-deploy-sync-state.json;
+            -rm -rf lp;
+            mkdir -p www/lp;
+            echo === www root after fix ===;
+            cls -la www;
+            echo === www/lp ===;
+            cls -la www/lp;
+            bye;
+          "
