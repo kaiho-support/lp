@@ -1,0 +1,31 @@
+name: FTP probe (temporary, incident recovery)
+
+on:
+  workflow_dispatch:
+    inputs:
+      dir:
+        description: 'server-dir to test'
+        required: true
+        default: 'lp/'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ftp-probe
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Upload probe file
+        uses: SamKirkland/FTP-Deploy-Action@8e83cea8672e3fbcbb9fdafff34debf6ae4c5f65 # v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./probe-src/
+          server-dir: ${{ inputs.dir }}
+          log-level: verbose
