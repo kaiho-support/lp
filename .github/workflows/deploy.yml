@@ -1,8 +1,9 @@
 name: Deploy to Sakura
 
 on:
-  push:
-    branches: [main]
+  # INCIDENT 2026-10-30: server-dir の解決先が想定と異なりルートへ
+  # アップロードされたため、正しいパス対応が確定するまで push 起動を停止。
+  # 復旧後に push トリガーを戻すこと。
   workflow_dispatch:
 
 # FTP認証情報は使わない（読み取りのみ）
