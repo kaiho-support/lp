@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
-<title>案1 改2 光の井戸 × 巻物 — 開豊ジャパン</title>
+<title>案1 改3 簡素化 — 開豊ジャパン</title>
 <link rel="preload" as="font" type="font/woff2" crossorigin href="/lp/fonts/kaiho-display-500.woff2">
 <link rel="preload" as="image" href="/lp/redesign/p1/hero.webp">
 <style>
@@ -46,7 +46,7 @@ header.site nav a{text-decoration:none;opacity:.85}
 main{padding-right:64px}
 @media(max-width:760px){main{padding-right:44px}}
 /* HERO : scroll-scrubbed video — the camera draws closer */
-.hero{height:280svh;position:relative}
+.hero{height:190svh;position:relative}
 .hero .stage{position:sticky;top:0;height:100svh;overflow:hidden;background:#060505}
 .hero img.ph,.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:16% 50%}
 .hero video{opacity:0;transition:opacity 1s ease .1s}
@@ -69,6 +69,14 @@ main{padding-right:64px}
 }
 @keyframes riseIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion: reduce){.hero .cue i::after{animation:none}}
+.statement{padding:clamp(72px,11svh,120px) clamp(20px,5vw,72px) clamp(8px,2svh,20px);position:relative}
+.statement .lbl{font-family:var(--sans);font-size:10px;letter-spacing:.42em;color:var(--muted);margin-bottom:22px}
+.statement p{font-family:var(--display);font-size:clamp(16px,1.9vw,20px);letter-spacing:.07em;line-height:2.15;color:#e6e0cf;max-width:640px}
+.statement p + p{margin-top:10px;color:#c9c3b2}
+.maplink{font-family:var(--sans);font-size:10.5px;letter-spacing:.18em;color:var(--muted);margin-left:16px;text-decoration:underline;text-underline-offset:4px;white-space:nowrap}
+.maplink:hover{color:var(--ink)}
+a.tel{color:inherit;text-decoration:none}
+a.tel:hover{text-decoration:underline;text-underline-offset:4px}
 /* reveal */
 @supports (animation-timeline: view()){
   @media (prefers-reduced-motion: no-preference){
@@ -143,7 +151,7 @@ footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;f
 </div>
 <header class="site">
   <div class="name">開豊ジャパン</div>
-  <nav><a href="#items">取扱品目</a><a href="#shop">店舗</a><a href="#about">会社概要</a><a href="#contact">お問い合わせ</a></nav>
+  <nav><a href="#about">会社概要</a><a href="#items">取扱品目</a><a href="#shop">店舗</a><a href="#contact">お問い合わせ</a></nav>
 </header>
 <main>
   <!-- HERO : scroll-scrubbed video -->
@@ -162,24 +170,31 @@ footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;f
     </div>
   </div>
 
-  <!-- 理念 -->
-  <section class="ch">
-    <div class="well"></div>
-    <div class="head rv"><div class="no">CHAPTER 01 — PHILOSOPHY</div><h2>理念</h2><div class="rule"></div></div>
-    <p class="lead rv">品物は、人の手を渡りながら生き続けてきました。私たちの仕事は、その歩みを絶やさず、次の持ち主へ丁寧に橋渡しすること。李朝の家具、白磁、茶道具——東アジアの暮らしが育んだ美を、八王子からお届けします。</p>
-  </section>
+  <!-- 導入（旧・理念を圧縮） -->
+  <div class="statement">
+    <div class="lbl rv">ABOUT — 開豊ジャパンについて</div>
+    <p class="rv">品物は、人の手を渡りながら生き続けてきました。私たちの仕事は、その歩みを絶やさず、次の持ち主へ丁寧に橋渡しすることです。</p>
+    <p class="rv">李朝の家具、白磁、茶道具——東アジアの暮らしが育んだ美を、八王子からお届けします。</p>
+  </div>
 
-  <!-- 白磁：唯一の明るい井戸 -->
-  <section class="ch bright">
-    <div class="head rv"><div class="no">CHAPTER 02 — WHITE PORCELAIN</div><h2>白の静けさ</h2><div class="rule"></div></div>
-    <figure class="unroll"><div class="ground"></div><img src="/lp/redesign/p1/moonjar-cut2.webp" alt="白磁の壺" width="1010" height="1041" loading="lazy" decoding="async"><figcaption>李朝白磁 — MOON JAR</figcaption></figure>
-    <p class="lead rv" style="margin-top:36px">歪みも、貫入も、そのままに。白磁の白は、何も足さないことで生まれる豊かさです。</p>
+
+  <!-- 会社概要 -->
+  <section class="ch" id="about">
+    <div class="head rv"><div class="no">CHAPTER 01 — COMPANY</div><h2>会社概要</h2><div class="rule"></div></div>
+    <dl class="kv rv">
+      <dt>会社名</dt><dd>株式会社 開豊ジャパン</dd>
+      <dt>代表者</dt><dd>代表取締役　金 載文</dd>
+      <dt>所在地</dt><dd>〒193-0935 東京都八王子市大船町142-6<a class="maplink" href="https://www.google.com/maps/search/?api=1&query=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%85%AB%E7%8E%8B%E5%AD%90%E5%B8%82%E5%A4%A7%E8%88%B9%E7%94%BA142-6" target="_blank" rel="noopener">地図で見る</a></dd>
+      <dt>電話</dt><dd><a class="tel" href="tel:0426677005">042-667-7005</a></dd>
+      <dt>営業時間</dt><dd>10:00–17:00（土・日・祝日 休業）</dd>
+      <dt>古物商許可</dt><dd>東京都公安委員会 第308770205133号</dd>
+    </dl>
   </section>
 
   <!-- 取扱品目 -->
   <section class="ch" id="items">
     <div class="well"></div>
-    <div class="head rv"><div class="no">CHAPTER 03 — COLLECTION</div><h2>取扱品目</h2><div class="rule"></div></div>
+    <div class="head rv"><div class="no">CHAPTER 02 — COLLECTION</div><h2>取扱品目</h2><div class="rule"></div></div>
     <div class="index rv">
       <a href="#shop"><span class="n">01</span><span class="t">東洋美術</span><span class="e">ORIENTAL ART</span></a>
       <a href="#shop"><span class="n">02</span><span class="t">西洋美術</span><span class="e">WESTERN ART</span></a>
@@ -195,11 +210,12 @@ footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;f
     </div>
   </section>
 
-  <!-- 茶道具 -->
-  <section class="ch">
-    <div class="well"></div>
-    <div class="head rv"><div class="no">CHAPTER 04 — TEA UTENSILS</div><h2>一服の道具</h2><div class="rule"></div></div>
-    <figure class="unroll"><img src="/lp/redesign/p1/tea-cut.webp" alt="木の盆に載る鉄瓶、茶碗、茶筅" width="1920" height="1280" loading="lazy" decoding="async"><figcaption>茶道具 — TEA UTENSILS</figcaption></figure>
+
+  <!-- 白磁：唯一の明るい井戸 -->
+  <section class="ch bright">
+    <div class="head rv"><div class="no">CHAPTER 03 — WHITE PORCELAIN</div><h2>白の静けさ</h2><div class="rule"></div></div>
+    <figure class="unroll"><div class="ground"></div><img src="/lp/redesign/p1/moonjar-cut2.webp" alt="白磁の壺" width="1010" height="1041" loading="lazy" decoding="async"><figcaption>李朝白磁 — MOON JAR</figcaption></figure>
+    <p class="lead rv" style="margin-top:36px">歪みも、貫入も、そのままに。白磁の白は、何も足さないことで生まれる豊かさです。</p>
   </section>
 
   <!-- Shop -->
@@ -208,7 +224,7 @@ footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;f
     <div class="shop">
       <figure class="unroll"><div class="ground"></div><img src="/lp/redesign/p1/celadon-cut.webp" alt="青磁の花器" width="910" height="1203" loading="lazy" decoding="async"><figcaption style="font-family:var(--sans);font-size:10px;letter-spacing:.26em;color:var(--muted);margin-top:16px">青磁 — CELADON</figcaption></figure>
       <div class="rv">
-        <div class="no" style="font-family:var(--sans);font-size:10px;letter-spacing:.42em;color:var(--muted)">SHOP — THE STORE</div>
+        <div class="no" style="font-family:var(--sans);font-size:10px;letter-spacing:.42em;color:var(--muted)">CHAPTER 04 — THE STORE</div>
         <h2 style="font-size:clamp(27px,3.3vw,40px);letter-spacing:.16em;margin:14px 0 20px">Galleria 李朝</h2>
         <p class="lead">出品中の品々は、Yahoo!オークションの店舗「Galleria李朝」にてご覧いただけます。一点ものの性質上、掲載は随時入れ替わります。</p>
         <a class="btn" href="https://auctions.yahoo.co.jp/seller/2TBbYXSSF6rHaqSv7EVuJg1R9X8gD" target="_blank" rel="noopener"><span>出品一覧を見る</span></a>
@@ -216,22 +232,10 @@ footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;f
     </div>
   </section>
 
-  <!-- 会社概要 -->
-  <section class="ch" id="about">
-    <div class="head rv"><div class="no">CHAPTER 05 — COMPANY</div><h2>会社概要</h2><div class="rule"></div></div>
-    <dl class="kv rv">
-      <dt>会社名</dt><dd>株式会社 開豊ジャパン</dd>
-      <dt>代表者</dt><dd>代表取締役　金 載文</dd>
-      <dt>所在地</dt><dd>〒193-0935 東京都八王子市大船町142-6</dd>
-      <dt>電話</dt><dd>042-667-7005</dd>
-      <dt>営業時間</dt><dd>10:00–17:00（土・日・祝日 休業）</dd>
-      <dt>古物商許可</dt><dd>東京都公安委員会 第308770205133号</dd>
-    </dl>
-  </section>
 
   <!-- お問い合わせ -->
   <section class="ch" id="contact">
-    <div class="head rv"><div class="no">CHAPTER 06 — CONTACT</div><h2>お問い合わせ</h2><div class="rule"></div></div>
+    <div class="head rv"><div class="no">CHAPTER 05 — CONTACT</div><h2>お問い合わせ</h2><div class="rule"></div></div>
     <div class="cards rv">
       <a class="card" href="tel:0426677005"><div class="k">TELEPHONE</div><div class="v">042-667-7005</div></a>
       <a class="card" href="mailto:info@kaihojpn.com"><div class="k">EMAIL</div><div class="v">info@kaihojpn.com</div></a>
@@ -244,7 +248,7 @@ footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;f
     <div class="row"><div>© KAIHO JAPAN Co., Ltd.</div><div>古物商許可 東京都公安委員会 第308770205133号</div></div>
   </footer>
 </main>
-<div class="tag">案1 改2 — 動画ヒーロー＋細部改修</div>
+<div class="tag">案1 改3 — 簡素化（セクション整理）</div>
 <script is:inline>
 (function(){
   var v = document.getElementById('heroVid');
