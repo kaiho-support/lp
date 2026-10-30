@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>案2 図録 — 開豊ジャパン</title>
+<style>
+:root{
+  --paper:#efede8; --ink:#16140f; --muted:#6f6a5e; --line:rgba(22,20,15,.22); --seal:#a33224;
+  --serif:"Didot","Bodoni MT","Bodoni 72","Hiragino Mincho ProN","Hiragino Mincho Pro","YuMincho","Yu Mincho","Noto Serif CJK JP",serif;
+  --sans:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic UI","Yu Gothic",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0908;color:var(--ink);font-family:var(--serif);line-height:1.9;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+/* PROLOGUE : dark frontispiece, paper slides over it */
+.prologue{position:sticky;top:0;height:100svh;z-index:1;overflow:hidden;background:#0a0908;color:#ece7da}
+.prologue img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.92}
+.prologue .shade{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 46%,transparent 40%,rgba(0,0,0,.55) 100%),linear-gradient(to top,rgba(0,0,0,.72) 0%,rgba(0,0,0,.28) 30%,transparent 52%)}
+.prologue .center{text-shadow:0 2px 24px rgba(0,0,0,.75)}
+.prologue .frame{position:absolute;inset:22px;border:1px solid rgba(236,231,218,.28);pointer-events:none}
+.prologue .center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:9svh;text-align:center}
+.prologue .en{font-family:var(--sans);font-size:10px;letter-spacing:.5em;color:#b7b1a2}
+.prologue h1{font-size:clamp(38px,5.6vw,72px);font-weight:500;letter-spacing:.3em;margin:14px 0 8px;text-indent:.3em}
+.prologue .sub{font-size:14px;letter-spacing:.34em;color:#cfc9ba}
+.prologue .seal{position:absolute;top:44px;right:48px;width:40px;height:40px;background:var(--seal);color:#fff;display:grid;place-items:center;font-size:19px;letter-spacing:0;line-height:1.1;writing-mode:vertical-rl;padding:4px}
+.prologue .cue{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);font-family:var(--sans);font-size:9px;letter-spacing:.4em;color:#8f897c}
+/* PAPER */
+.paper{position:relative;z-index:2;background:var(--paper);box-shadow:0 -30px 80px rgba(0,0,0,.55);padding:0 clamp(20px,5vw,76px)}
+.paper .inner{max-width:1020px;margin:0 auto}
+.frontmatter{padding:74px 0 10px;display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--ink);font-family:var(--sans);font-size:10px;letter-spacing:.3em;color:var(--muted)}
+.frontmatter .big{font-family:var(--serif);font-size:15px;letter-spacing:.24em;color:var(--ink)}
+section{padding:clamp(64px,10svh,110px) 0;border-bottom:1px solid var(--line)}
+.kicker{font-family:var(--sans);font-size:10px;letter-spacing:.42em;color:var(--muted);display:flex;align-items:center;gap:16px}
+.kicker::after{content:"";flex:1;border-top:1px solid var(--line)}
+h2{font-size:clamp(27px,3.4vw,40px);font-weight:500;letter-spacing:.18em;margin:16px 0 22px}
+.lead{max-width:600px;font-size:15.5px;letter-spacing:.05em;color:#2c2921}
+/* plates */
+.plates{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,70px)}
+.plates figure.full{grid-column:1/-1;max-width:640px;margin:0 auto;width:100%}
+@media(max-width:760px){.plates{grid-template-columns:1fr}}
+figure img{width:100%;height:auto;background:#e3e0d8}
+figcaption{margin-top:14px;border-top:1px solid var(--line);padding-top:10px;display:flex;gap:18px;align-items:baseline}
+figcaption .pl{font-family:var(--sans);font-size:10px;letter-spacing:.24em;color:var(--seal);white-space:nowrap}
+figcaption .cap{font-size:13.5px;letter-spacing:.08em}
+figcaption .cap small{display:block;color:var(--muted);font-size:11.5px;letter-spacing:.06em}
+/* catalogue index */
+table.index{width:100%;border-collapse:collapse}
+table.index th,table.index td{padding:15px 8px;border-bottom:1px solid var(--line);text-align:left;font-weight:400}
+table.index th{font-family:var(--sans);font-size:9.5px;letter-spacing:.3em;color:var(--muted)}
+table.index td.n{font-family:var(--sans);font-size:11px;color:var(--muted);width:56px}
+table.index td.t{font-size:17.5px;letter-spacing:.2em}
+table.index td.e{font-family:var(--sans);font-size:9.5px;letter-spacing:.26em;color:var(--muted);text-align:right}
+table.index tr{transition:background .3s}
+table.index tbody tr:hover{background:rgba(22,20,15,.045)}
+/* specs */
+table.spec{width:100%;border-collapse:collapse;max-width:780px}
+table.spec th,table.spec td{padding:14px 8px;border-bottom:1px solid var(--line);text-align:left;font-size:14.5px;letter-spacing:.06em;vertical-align:top}
+table.spec th{font-family:var(--sans);font-size:10.5px;letter-spacing:.24em;color:var(--muted);width:170px;padding-top:18px;font-weight:400}
+.btn{display:inline-block;margin-top:28px;padding:15px 36px;background:var(--ink);color:var(--paper);text-decoration:none;font-family:var(--sans);font-size:11.5px;letter-spacing:.3em;transition:background .3s}
+.btn:hover{background:var(--seal)}
+.contact-row{display:flex;gap:44px;flex-wrap:wrap}
+.contact-row .k{font-family:var(--sans);font-size:9.5px;letter-spacing:.3em;color:var(--muted)}
+.contact-row .v{font-size:21px;letter-spacing:.1em;margin-top:6px}
+.contact-row a{text-decoration:none}
+/* colophon */
+.colophon{padding:76px 0 64px;text-align:center}
+.colophon .rule{width:56px;border-top:2px solid var(--ink);margin:0 auto 30px}
+.colophon .seal{display:inline-grid;place-items:center;width:34px;height:34px;background:var(--seal);color:#fff;font-size:16px;writing-mode:vertical-rl;line-height:1.1;margin-bottom:22px}
+.colophon p{font-size:12.5px;letter-spacing:.18em;color:#3a372e;line-height:2.2}
+.colophon .tiny{font-family:var(--sans);font-size:9.5px;letter-spacing:.26em;color:var(--muted);margin-top:20px}
+.tag{position:fixed;left:14px;bottom:14px;z-index:80;background:#16140f;color:#efede8;font-family:var(--sans);font-size:10px;letter-spacing:.18em;padding:7px 12px}
+@media (prefers-reduced-motion: no-preference){
+  @supports (animation-timeline: view()){
+    .rv{animation:rvIn linear both;animation-timeline:view();animation-range:entry 6% entry 55%}
+  }
+}
+@keyframes rvIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<!-- 序：暗い口絵 -->
+<div class="prologue">
+  <img src="/lp/redesign/p2/hero.webp" alt="李朝の箪笥 正面">
+  <div class="shade"></div><div class="frame"></div>
+  <div class="seal" aria-hidden="true">開</div>
+  <div class="center">
+    <div class="en">KAIHO JAPAN — A CATALOGUE OF ASIAN ANTIQUES</div>
+    <h1>開豊ジャパン</h1>
+    <div class="sub">古美術 目録</div>
+  </div>
+  <div class="cue">SCROLL</div>
+</div>
+
+<!-- 紙の本編 -->
+<div class="paper"><div class="inner">
+  <div class="frontmatter"><span class="big">株式会社 開豊ジャパン</span><span>HACHIOJI, TOKYO</span><span>目録 第一輯</span></div>
+
+  <section>
+    <div class="kicker">PREFACE — 序</div>
+    <h2>品物には、来歴がある</h2>
+    <p class="lead">開豊ジャパンは、東京都八王子の古美術商です。李朝の家具、白磁、茶道具をはじめ、東洋・西洋の美術品を取り扱います。本ページは、当社の取り扱う品々と会社概要を、一冊の目録のようにまとめたものです。出品中の品は、店舗「Galleria李朝」にてご覧いただけます。</p>
+  </section>
+
+  <section>
+    <div class="kicker">PLATES — 図版</div>
+    <h2>図版</h2>
+    <div class="plates">
+      <figure class="rv"><img src="/lp/redesign/p2/moonjar.webp" alt="白磁の壺"><figcaption><span class="pl">図版 一</span><span class="cap">李朝白磁 壺<small>白磁 — 朝鮮時代の白の美しさ</small></span></figcaption></figure>
+      <figure class="rv"><img src="/lp/redesign/p2/tea.webp" alt="茶道具"><figcaption><span class="pl">図版 二</span><span class="cap">茶道具 一式<small>鉄瓶・茶碗・茶筅 — 一服のための道具</small></span></figcaption></figure>
+      <figure class="full rv"><img src="/lp/redesign/p2/detail.webp" alt="箪笥の錠前金具の細部"><figcaption><span class="pl">図版 三</span><span class="cap">箪笥 錠前金具 細部<small>木目と鉄 — 使い込まれた表面の記録</small></span></figcaption></figure>
+    </div>
+  </section>
+
+  <section id="items">
+    <div class="kicker">CONTENTS — 目次</div>
+    <h2>取扱品目</h2>
+    <table class="index">
+      <thead><tr><th>番號</th><th>品目</th><th style="text-align:right">CATEGORY</th></tr></thead>
+      <tbody>
+        <tr><td class="n">01</td><td class="t">東洋美術</td><td class="e">ORIENTAL ART</td></tr>
+        <tr><td class="n">02</td><td class="t">西洋美術</td><td class="e">WESTERN ART</td></tr>
+        <tr><td class="n">03</td><td class="t">日本陶磁器</td><td class="e">JAPANESE CERAMICS</td></tr>
+        <tr><td class="n">04</td><td class="t">中国陶磁器</td><td class="e">CHINESE CERAMICS</td></tr>
+        <tr><td class="n">05</td><td class="t">茶道具</td><td class="e">TEA UTENSILS</td></tr>
+        <tr><td class="n">06</td><td class="t">花道具</td><td class="e">FLOWER UTENSILS</td></tr>
+        <tr><td class="n">07</td><td class="t">諸道具</td><td class="e">ASSORTED TOOLS</td></tr>
+        <tr><td class="n">08</td><td class="t">掛軸</td><td class="e">HANGING SCROLLS</td></tr>
+        <tr><td class="n">09</td><td class="t">絵画</td><td class="e">PAINTINGS</td></tr>
+        <tr><td class="n">10</td><td class="t">美術装飾品</td><td class="e">DECORATIVE ART</td></tr>
+        <tr><td class="n">11</td><td class="t">その他美術品</td><td class="e">OTHER WORKS</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="shop">
+    <div class="kicker">SHOP — 店舗</div>
+    <h2>Galleria 李朝</h2>
+    <p class="lead">実際の出品は、Yahoo!オークション上の店舗「Galleria李朝」で行っています。一点もののため、目録に載せきれない品も多数ございます。最新の出品一覧はこちらから。</p>
+    <a class="btn" href="https://auctions.yahoo.co.jp/seller/2TBbYXSSF6rHaqSv7EVuJg1R9X8gD" target="_blank" rel="noopener">出品一覧を見る</a>
+  </section>
+
+  <section id="about">
+    <div class="kicker">COMPANY — 会社概要</div>
+    <h2>会社概要</h2>
+    <table class="spec">
+      <tr><th>会社名</th><td>株式会社 開豊ジャパン</td></tr>
+      <tr><th>代表者</th><td>代表取締役　金 載文</td></tr>
+      <tr><th>所在地</th><td>〒193-0935 東京都八王子市大船町142-6</td></tr>
+      <tr><th>電話</th><td>042-667-7005</td></tr>
+      <tr><th>営業時間</th><td>10:00–17:00（土・日・祝日 休業）</td></tr>
+      <tr><th>古物商許可</th><td>東京都公安委員会 第308770205133号</td></tr>
+    </table>
+  </section>
+
+  <section id="contact" style="border-bottom:none">
+    <div class="kicker">CONTACT — お問い合わせ</div>
+    <h2>お問い合わせ</h2>
+    <div class="contact-row">
+      <a href="tel:0426677005"><div class="k">TELEPHONE</div><div class="v">042-667-7005</div></a>
+      <a href="mailto:info@kaihojpn.com"><div class="k">EMAIL</div><div class="v">info@kaihojpn.com</div></a>
+    </div>
+    <p class="lead" style="margin-top:24px;font-size:13.5px;color:var(--muted)">受付は営業時間内（10:00–17:00）。ご来店の際は事前にお電話ください。</p>
+  </section>
+
+  <!-- 奥付 -->
+  <div class="colophon">
+    <div class="rule"></div>
+    <div class="seal" aria-hidden="true">開</div>
+    <p>発行　株式会社 開豊ジャパン<br>東京都八王子市大船町142-6<br>古物商許可　東京都公安委員会 第308770205133号</p>
+    <div class="tiny">© KAIHO JAPAN Co., Ltd. — PRINTED ON THE WEB</div>
+  </div>
+</div></div>
+<div class="tag">案2 — 図録</div>
+</body>
+</html>
