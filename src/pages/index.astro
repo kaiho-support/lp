@@ -40,39 +40,35 @@ a{color:inherit}
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");}
 /* vertical rail */
 .rail{position:fixed;top:0;right:0;height:100svh;width:64px;z-index:50;display:flex;flex-direction:column;align-items:center;padding:24px 0 26px;
-  background:linear-gradient(90deg,#0c0b09 0%,#161310 34%,#221c14 52%,#15110c 74%,#090807 100%);box-shadow:inset 0 0 22px rgba(0,0,0,.55)}
+  background:linear-gradient(90deg,#0a0a0b 0%,#131416 34%,#1d1e20 52%,#111214 74%,#080808 100%);box-shadow:inset 0 0 22px rgba(0,0,0,.6)}
 .rail::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
   background:repeating-linear-gradient(0deg,rgba(255,255,255,.022) 0 1px,transparent 1px 3px)}
 .rail::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;z-index:3;
-  background:linear-gradient(to bottom,#221c14 0%,#6f6046 16%,#c9b586 38%,#e9dcbc 50%,#a68f5f 62%,#57492f 84%,#1d1811 100%)}
-.rail .prog{position:absolute;left:0;top:0;width:2px;height:100%;z-index:4;background:linear-gradient(#fdf6da,rgba(233,220,180,.5));box-shadow:0 0 9px rgba(250,240,205,.5);transform:scaleY(0);transform-origin:top}
+  background:linear-gradient(to bottom,#101112 0%,#3f4347 16%,#9ba1a6 38%,#dde1e4 50%,#848a8f 62%,#3a3e42 84%,#101112 100%)}
+.rail .prog{position:absolute;left:0;top:0;width:2px;height:100%;z-index:4;background:linear-gradient(#f4f6f7,rgba(198,204,209,.5));box-shadow:0 0 9px rgba(232,236,239,.45);transform:scaleY(0);transform-origin:top}
 .rail a{text-decoration:none}
-.rail .mark{font-family:var(--display);font-size:19px;color:#e6d9b8;width:35px;height:35px;display:grid;place-items:center;flex:none;
-  border:1px solid transparent;background:linear-gradient(#171410,#171410) padding-box,linear-gradient(155deg,#8a7a54,#e9dcbc 45%,#5d4f36 90%) border-box;
+.rail .mark{font-family:var(--display);font-size:19px;color:#e8e9ea;width:35px;height:35px;display:grid;place-items:center;flex:none;
+  border:1px solid transparent;background:linear-gradient(#151618,#151618) padding-box,linear-gradient(155deg,#5a5f64,#e8ecee 45%,#3f4347 90%) border-box;
   box-shadow:0 2px 8px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.08)}
 .rail nav{display:flex;flex-direction:column;gap:6px;margin-top:5.5svh;position:relative;z-index:2}
-.rail nav a{display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 0 8px;width:64px;color:#b6a888;opacity:.62;transition:opacity .3s,color .3s}
+.rail nav a{display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 0 8px;width:64px;color:#b9bdc0;opacity:.62;transition:opacity .3s,color .3s}
 .rail nav a svg{width:21px;height:21px;fill:none;stroke:url(#metalGrad);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 1px rgba(0,0,0,.65))}
-.rail nav a i{font-style:normal;font-family:var(--sans);font-size:8px;letter-spacing:.14em;color:#a4936f}
+.rail nav a i{font-style:normal;font-family:var(--sans);font-size:8px;letter-spacing:.14em;color:#8f959a}
 .rail nav a:hover{opacity:1}
-.rail nav a.active{opacity:1;color:#f0e5c4}
-.rail nav a.active i{color:#e9dcbc}
+.rail nav a.active{opacity:1;color:#f2f4f5}
+.rail nav a.active i{color:#dde1e4}
 @supports (animation-timeline: scroll()){
   @media (prefers-reduced-motion: no-preference){
     .rail .prog{animation:progFill linear both;animation-timeline:scroll(root)}
   }
 }
 @keyframes progFill{to{transform:scaleY(1)}}
-.rail .v{writing-mode:vertical-rl;font-family:var(--display);font-size:15px;letter-spacing:.42em;color:var(--ink);margin-top:auto;position:relative;z-index:2}
-.rail .v small{display:block;font-family:var(--sans);font-size:9px;letter-spacing:.3em;color:var(--muted);margin-top:18px}
 header.site{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:20px clamp(20px,4vw,54px);mix-blend-mode:difference;text-shadow:0 1px 14px rgba(0,0,0,.55)}
 header.site .name{font-family:var(--display);font-size:15px;letter-spacing:.34em}
-header.site nav{font-family:var(--sans);font-size:10px;letter-spacing:.28em;display:flex;gap:26px}
-header.site nav a{text-decoration:none;opacity:.85}
 header.site{transition:background .35s ease,border-color .35s ease}
 header.site.scrolled{mix-blend-mode:normal;background:rgba(10,9,8,.86);backdrop-filter:blur(9px);border-bottom:1px solid var(--line);text-shadow:none}
 header.site .hphone{font-family:var(--sans);font-size:11.5px;letter-spacing:.2em;color:var(--ink);text-decoration:none;border-left:1px solid rgba(233,227,213,.35);padding-left:26px;margin-left:2px;white-space:nowrap}
-@media(max-width:760px){header.site{right:38px}header.site nav{display:none}header.site .hphone{border-left:none;padding-left:0;margin-left:0}}
+@media(max-width:760px){header.site{right:38px}header.site .hphone{border-left:none;padding-left:0;margin-left:0}}
 main{padding-right:64px}
 /* HERO : scroll-scrubbed video — the camera draws closer */
 .hero{height:190svh;position:relative}
@@ -83,7 +79,6 @@ main{padding-right:64px}
 .hero video.live{opacity:1}
 @media(max-width:760px){.hero img.ph,.hero video{object-position:50% 50%}}
 .hero .shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,4,3,.58) 0%,rgba(5,4,3,.12) 34%,transparent 55%);pointer-events:none}
-.hero .ghost{position:absolute;top:6%;right:9%;writing-mode:vertical-rl;font-family:var(--display);font-size:clamp(90px,17vw,220px);letter-spacing:.08em;color:transparent;-webkit-text-stroke:1px rgba(233,227,213,.30);line-height:1;user-select:none}
 .hero .title{position:absolute;left:clamp(20px,5vw,72px);bottom:12%;max-width:660px}
 .hero .title .en{font-family:var(--sans);font-size:10px;letter-spacing:.4em;color:#cfc8b6;margin-bottom:18px;display:flex;align-items:center;gap:14px}
 .hero .title .en::before{content:"";width:26px;height:1px;background:rgba(233,227,213,.6)}
@@ -141,11 +136,9 @@ section.ch{padding:clamp(96px,16svh,180px) clamp(20px,5vw,72px);position:relativ
 .index a{display:flex;align-items:baseline;gap:clamp(16px,3vw,40px);padding:22px 8px;border-bottom:1px solid var(--line);text-decoration:none;position:relative;overflow:hidden}
 .index a .n{font-family:var(--sans);font-size:10px;color:var(--muted);letter-spacing:.2em;min-width:34px}
 .index a .t{font-family:var(--display);font-size:clamp(19px,2.4vw,27px);letter-spacing:.22em;transition:transform .45s cubic-bezier(.6,0,.2,1)}
-.index a .e{margin-left:auto;font-family:var(--sans);font-size:9.5px;letter-spacing:.3em;color:var(--muted)}
 .index a::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 46% 120% at 24% 50%,rgba(245,236,210,.13),transparent 70%);opacity:0;transition:opacity .5s}
 .index a:hover::after{opacity:1}
 .index a:hover .t{transform:translateX(10px)}
-@media(max-width:760px){.index a .e{display:none}}
 /* shop */
 .shop{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,72px);align-items:center;position:relative}
 @media(max-width:760px){.shop{grid-template-columns:1fr}}
@@ -173,7 +166,6 @@ footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;f
 /* ===== smartphone (the majority of visitors) ===== */
 @media(max-width:760px){
   .rail{width:38px;padding:16px 0 18px}
-  .rail .v,.rail .btm{display:none}
   .rail .mark{width:27px;height:27px;font-size:14px}
   .rail nav{gap:2px;margin-top:4svh}
   .rail nav a{width:38px;padding:11px 0 9px}
@@ -184,8 +176,7 @@ footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;f
   header.site .hphone{padding:12px 0;font-size:11.5px}
   main{padding-right:38px}
   .hero{height:165svh}
-  .hero .ghost{font-size:13vw;right:5%;top:35%}
-  .hero .title{top:11%;bottom:auto}
+    .hero .title{top:11%;bottom:auto}
   .hero .shade{background:linear-gradient(to bottom,rgba(5,4,3,.66) 0%,rgba(5,4,3,.22) 34%,transparent 54%),linear-gradient(to top,rgba(5,4,3,.55) 0%,transparent 26%)}
   .hero .title .en{font-size:9px;letter-spacing:.19em;line-height:2;white-space:nowrap}
   .hero .title .en .pc{display:none}
@@ -212,7 +203,7 @@ footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;f
 <div class="grain"></div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <linearGradient id="metalGrad" x1="0" y1="0" x2="1" y2="1">
-  <stop offset="0" stop-color="#8a7a54"/><stop offset=".45" stop-color="#efe2bc"/><stop offset=".7" stop-color="#c9b586"/><stop offset="1" stop-color="#5d4f36"/>
+  <stop offset="0" stop-color="#555a5f"/><stop offset=".45" stop-color="#e8ecee"/><stop offset=".7" stop-color="#9ba1a6"/><stop offset="1" stop-color="#3f4347"/>
 </linearGradient></defs></svg>
 <div class="rail">
   <div class="prog"></div>
@@ -223,12 +214,9 @@ footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;f
     <a href="#shop" data-sec="shop"><svg viewBox="0 0 24 24"><path d="M5.5 8h13l-1.2 12.5H6.7L5.5 8z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></svg><i>店舗</i></a>
     <a href="#contact" data-sec="contact"><svg viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg><i>問合せ</i></a>
   </nav>
-  <div class="v" aria-hidden="true">古美術<small>KAIHO JAPAN</small></div>
-  <div class="v btm" style="font-size:11px;color:var(--muted)" aria-hidden="true">八王子</div>
 </div>
 <header class="site">
   <div class="name">開豊ジャパン</div>
-  <nav><a href="#about">会社概要</a><a href="#items">取扱品目</a><a href="#shop">店舗</a><a href="#contact">お問い合わせ</a></nav>
   <a class="hphone" href="tel:0426677005">042-667-7005</a>
 </header>
 <main>
@@ -245,13 +233,12 @@ footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;f
         <source src="/lp/redesign/p1/hero-h264.mp4" type="video/mp4">
       </video>
       <div class="shade"></div>
-      <div class="ghost" aria-hidden="true">古美術</div>
       <div class="title">
-        <div class="en">KAIHO JAPAN — ASIAN ANTIQUES<span class="pc">, HACHIOJI TOKYO</span></div>
+        <div class="en">KAIHO JAPAN</div>
         <h1>開豊ジャパン</h1>
         <p>時を経たものに、もう一度、光を当てる。<br>八王子の古美術商、開豊ジャパンです。</p>
       </div>
-      <div class="cue"><span>SCROLL</span><i></i><span>箪笥に、近づいていきます</span></div>
+      <div class="cue"><span>SCROLL</span><i></i></div>
     </div>
   </div>
 
@@ -281,17 +268,17 @@ footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;f
     <div class="well"></div>
     <div class="head rv"><div class="no">CHAPTER 02 — COLLECTION</div><h2>取扱品目</h2><div class="rule"></div></div>
     <div class="index rv">
-      <a href="#shop"><span class="n">01</span><span class="t">東洋美術</span><span class="e">ORIENTAL ART</span></a>
-      <a href="#shop"><span class="n">02</span><span class="t">西洋美術</span><span class="e">WESTERN ART</span></a>
-      <a href="#shop"><span class="n">03</span><span class="t">日本陶磁器</span><span class="e">JAPANESE CERAMICS</span></a>
-      <a href="#shop"><span class="n">04</span><span class="t">中国陶磁器</span><span class="e">CHINESE CERAMICS</span></a>
-      <a href="#shop"><span class="n">05</span><span class="t">茶道具</span><span class="e">TEA UTENSILS</span></a>
-      <a href="#shop"><span class="n">06</span><span class="t">花道具</span><span class="e">FLOWER UTENSILS</span></a>
-      <a href="#shop"><span class="n">07</span><span class="t">諸道具</span><span class="e">ASSORTED TOOLS</span></a>
-      <a href="#shop"><span class="n">08</span><span class="t">掛軸</span><span class="e">HANGING SCROLLS</span></a>
-      <a href="#shop"><span class="n">09</span><span class="t">絵画</span><span class="e">PAINTINGS</span></a>
-      <a href="#shop"><span class="n">10</span><span class="t">美術装飾品</span><span class="e">DECORATIVE ART</span></a>
-      <a href="#shop"><span class="n">11</span><span class="t">その他美術品</span><span class="e">OTHER WORKS</span></a>
+      <a href="#shop"><span class="n">01</span><span class="t">東洋美術</span></a>
+      <a href="#shop"><span class="n">02</span><span class="t">西洋美術</span></a>
+      <a href="#shop"><span class="n">03</span><span class="t">日本陶磁器</span></a>
+      <a href="#shop"><span class="n">04</span><span class="t">中国陶磁器</span></a>
+      <a href="#shop"><span class="n">05</span><span class="t">茶道具</span></a>
+      <a href="#shop"><span class="n">06</span><span class="t">花道具</span></a>
+      <a href="#shop"><span class="n">07</span><span class="t">諸道具</span></a>
+      <a href="#shop"><span class="n">08</span><span class="t">掛軸</span></a>
+      <a href="#shop"><span class="n">09</span><span class="t">絵画</span></a>
+      <a href="#shop"><span class="n">10</span><span class="t">美術装飾品</span></a>
+      <a href="#shop"><span class="n">11</span><span class="t">その他美術品</span></a>
     </div>
   </section>
 
