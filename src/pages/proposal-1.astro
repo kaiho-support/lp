@@ -27,17 +27,32 @@ a{color:inherit}
 .grain{position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.05;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");}
 /* vertical rail */
-.rail{position:fixed;top:0;right:0;height:100svh;width:64px;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:28px 0;border-left:1px solid var(--line);background:rgba(11,10,9,.35);backdrop-filter:blur(2px)}
-.rail .prog{position:absolute;left:-1px;top:0;width:3px;height:100%;background:linear-gradient(#f5efdd,rgba(233,227,213,.45));box-shadow:0 0 8px rgba(245,239,221,.35);transform:scaleY(0);transform-origin:top}
+.rail{position:fixed;top:0;right:0;height:100svh;width:64px;z-index:50;display:flex;flex-direction:column;align-items:center;padding:24px 0 26px;
+  background:linear-gradient(90deg,#0c0b09 0%,#161310 34%,#221c14 52%,#15110c 74%,#090807 100%);box-shadow:inset 0 0 22px rgba(0,0,0,.55)}
+.rail::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,.022) 0 1px,transparent 1px 3px)}
+.rail::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;z-index:3;
+  background:linear-gradient(to bottom,#221c14 0%,#6f6046 16%,#c9b586 38%,#e9dcbc 50%,#a68f5f 62%,#57492f 84%,#1d1811 100%)}
+.rail .prog{position:absolute;left:0;top:0;width:2px;height:100%;z-index:4;background:linear-gradient(#fdf6da,rgba(233,220,180,.5));box-shadow:0 0 9px rgba(250,240,205,.5);transform:scaleY(0);transform-origin:top}
+.rail a{text-decoration:none}
+.rail .mark{font-family:var(--display);font-size:19px;color:#e6d9b8;width:35px;height:35px;display:grid;place-items:center;flex:none;
+  border:1px solid transparent;background:linear-gradient(#171410,#171410) padding-box,linear-gradient(155deg,#8a7a54,#e9dcbc 45%,#5d4f36 90%) border-box;
+  box-shadow:0 2px 8px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.08)}
+.rail nav{display:flex;flex-direction:column;gap:6px;margin-top:5.5svh;position:relative;z-index:2}
+.rail nav a{display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 0 8px;width:64px;color:#b6a888;opacity:.62;transition:opacity .3s,color .3s}
+.rail nav a svg{width:21px;height:21px;fill:none;stroke:url(#metalGrad);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 1px rgba(0,0,0,.65))}
+.rail nav a i{font-style:normal;font-family:var(--sans);font-size:8px;letter-spacing:.14em;color:#a4936f}
+.rail nav a:hover{opacity:1}
+.rail nav a.active{opacity:1;color:#f0e5c4}
+.rail nav a.active i{color:#e9dcbc}
 @supports (animation-timeline: scroll()){
   @media (prefers-reduced-motion: no-preference){
     .rail .prog{animation:progFill linear both;animation-timeline:scroll(root)}
   }
 }
 @keyframes progFill{to{transform:scaleY(1)}}
-.rail .v{writing-mode:vertical-rl;font-family:var(--display);font-size:15px;letter-spacing:.42em;color:var(--ink)}
+.rail .v{writing-mode:vertical-rl;font-family:var(--display);font-size:15px;letter-spacing:.42em;color:var(--ink);margin-top:auto;position:relative;z-index:2}
 .rail .v small{display:block;font-family:var(--sans);font-size:9px;letter-spacing:.3em;color:var(--muted);margin-top:18px}
-.rail .mark{font-family:var(--display);font-size:20px;border:1px solid var(--line);width:34px;height:34px;display:grid;place-items:center}
 header.site{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:20px clamp(20px,4vw,54px);mix-blend-mode:difference;text-shadow:0 1px 14px rgba(0,0,0,.55)}
 header.site .name{font-family:var(--display);font-size:15px;letter-spacing:.34em}
 header.site nav{font-family:var(--sans);font-size:10px;letter-spacing:.28em;display:flex;gap:26px}
@@ -45,7 +60,7 @@ header.site nav a{text-decoration:none;opacity:.85}
 header.site{transition:background .35s ease,border-color .35s ease}
 header.site.scrolled{mix-blend-mode:normal;background:rgba(10,9,8,.86);backdrop-filter:blur(9px);border-bottom:1px solid var(--line);text-shadow:none}
 header.site .hphone{font-family:var(--sans);font-size:11.5px;letter-spacing:.2em;color:var(--ink);text-decoration:none;border-left:1px solid rgba(233,227,213,.35);padding-left:26px;margin-left:2px;white-space:nowrap}
-@media(max-width:760px){header.site nav{display:none}header.site .hphone{border-left:none;padding-left:0;margin-left:0}}
+@media(max-width:760px){header.site{right:38px}header.site nav{display:none}header.site .hphone{border-left:none;padding-left:0;margin-left:0}}
 main{padding-right:64px}
 /* HERO : scroll-scrubbed video — the camera draws closer */
 .hero{height:190svh;position:relative}
@@ -145,24 +160,28 @@ footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;f
 @media(min-width:761px){header.site{right:64px}}
 /* ===== smartphone (the majority of visitors) ===== */
 @media(max-width:760px){
-  .rail{width:0;border-left:none;background:none;backdrop-filter:none}
-  .rail .mark,.rail .v{display:none}
-  .rail .prog{left:auto;right:0;width:2px}
+  .rail{width:38px;padding:16px 0 18px}
+  .rail .v,.rail .btm{display:none}
+  .rail .mark{width:27px;height:27px;font-size:14px}
+  .rail nav{gap:2px;margin-top:4svh}
+  .rail nav a{width:38px;padding:11px 0 9px}
+  .rail nav a svg{width:18px;height:18px}
+  .rail nav a i{font-size:7px;letter-spacing:.08em}
   header.site{padding:14px 20px}
   header.site .name{font-size:14px;letter-spacing:.3em}
   header.site .hphone{padding:12px 0;font-size:11.5px}
-  main{padding-right:0}
+  main{padding-right:38px}
   .hero{height:165svh}
   .hero .ghost{font-size:13vw;right:5%;top:35%}
   .hero .title{top:11%;bottom:auto}
   .hero .shade{background:linear-gradient(to bottom,rgba(5,4,3,.66) 0%,rgba(5,4,3,.22) 34%,transparent 54%),linear-gradient(to top,rgba(5,4,3,.55) 0%,transparent 26%)}
-  .hero .title .en{font-size:9px;letter-spacing:.26em;line-height:2}
+  .hero .title .en{font-size:9px;letter-spacing:.19em;line-height:2;white-space:nowrap}
   .hero .title .en .pc{display:none}
   .hero .title h1{font-size:46px}
   .hero .cue{letter-spacing:.26em;font-size:8.5px;gap:12px}
   .statement .lbl{letter-spacing:.3em}
   section.ch{padding:84px 22px;scroll-margin-top:56px}
-  .ch .no{font-size:9.5px;letter-spacing:.24em}
+  .ch .no{font-size:8.8px;letter-spacing:.15em;white-space:nowrap}
   .ch h2{font-size:30px}
   .kv{grid-template-columns:1fr}
   .kv dt{padding:15px 0 3px;border-bottom:none}
@@ -180,11 +199,21 @@ footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;f
 </head>
 <body>
 <div class="grain"></div>
-<div class="rail" aria-hidden="true">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<linearGradient id="metalGrad" x1="0" y1="0" x2="1" y2="1">
+  <stop offset="0" stop-color="#8a7a54"/><stop offset=".45" stop-color="#efe2bc"/><stop offset=".7" stop-color="#c9b586"/><stop offset="1" stop-color="#5d4f36"/>
+</linearGradient></defs></svg>
+<div class="rail">
   <div class="prog"></div>
-  <div class="mark">開</div>
-  <div class="v">古美術<small>KAIHO JAPAN</small></div>
-  <div class="v btm" style="font-size:11px;color:var(--muted)">八王子</div>
+  <a class="mark" href="#heroSec" aria-label="トップへ">開</a>
+  <nav aria-label="ページ内案内">
+    <a href="#about" data-sec="about"><svg viewBox="0 0 24 24"><path d="M4 21V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v15"/><path d="M16 10h3a1 1 0 0 1 1 1v10"/><path d="M2.5 21h19"/><path d="M8 8h2M8 12h2M8 16h2M13 8h.01M13 12h.01M13 16h.01"/></svg><i>概要</i></a>
+    <a href="#items" data-sec="items"><svg viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></svg><i>品目</i></a>
+    <a href="#shop" data-sec="shop"><svg viewBox="0 0 24 24"><path d="M5.5 8h13l-1.2 12.5H6.7L5.5 8z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/></svg><i>店舗</i></a>
+    <a href="#contact" data-sec="contact"><svg viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg><i>問合せ</i></a>
+  </nav>
+  <div class="v" aria-hidden="true">古美術<small>KAIHO JAPAN</small></div>
+  <div class="v btm" style="font-size:11px;color:var(--muted)" aria-hidden="true">八王子</div>
 </div>
 <header class="site">
   <div class="name">開豊ジャパン</div>
@@ -323,6 +352,17 @@ footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;f
     var pr = v.play(); if(pr && pr.then){ pr.then(function(){ v.pause(); }).catch(function(){}); } });
   v.addEventListener('seeked', function(){ seeking = false; });
   window.addEventListener('scroll', upd, {passive:true});
+  var navLinks = document.querySelectorAll('.rail nav a[data-sec]');
+  if('IntersectionObserver' in window && navLinks.length){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting){
+          navLinks.forEach(function(a){ a.classList.toggle('active', a.getAttribute('data-sec') === e.target.id); });
+        }
+      });
+    }, {rootMargin:'-38% 0px -52% 0px'});
+    ['about','items','shop','contact'].forEach(function(id){ var el = document.getElementById(id); if(el) io.observe(el); });
+  }
   var hd = document.querySelector('header.site');
   var onScr = function(){ if(hd) hd.classList.toggle('scrolled', window.scrollY > 30); };
   window.addEventListener('scroll', onScr, {passive:true}); onScr();
