@@ -18,7 +18,8 @@
 {"@context":"https://schema.org","@type":"AntiqueStore","name":"株式会社 開豊ジャパン","url":"https://kaihojpn.com/lp/","telephone":"+81-42-667-7005","email":"info@kaihojpn.com","address":{"@type":"PostalAddress","postalCode":"193-0935","addressRegion":"東京都","addressLocality":"八王子市","streetAddress":"大船町142-6","addressCountry":"JP"},"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"10:00","closes":"17:00"}}
 </script>
 <link rel="preload" as="font" type="font/woff2" crossorigin href="/lp/fonts/kaiho-display-500.woff2">
-<link rel="preload" as="image" href="/lp/redesign/p1/hero.webp">
+<link rel="preload" as="image" href="/lp/redesign/p1/hero.webp" media="(min-width: 761px)">
+<link rel="preload" as="image" href="/lp/redesign/p1/hero-m.webp" media="(max-width: 760px)">
 <style>
 @font-face{font-family:'Kaiho Display';src:url('/lp/fonts/kaiho-display-500.woff2') format('woff2');font-weight:500;font-display:swap}
 :root{
@@ -35,7 +36,7 @@ img{display:block;max-width:100%}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 ::selection{background:#e9e3d5;color:#12100d}
-.grain{position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:60;opacity:.05;
+.grain{position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.05;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");}
 /* vertical rail */
 .rail{position:fixed;top:0;right:0;height:100svh;width:64px;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:28px 0;border-left:1px solid var(--line);background:rgba(11,10,9,.35);backdrop-filter:blur(2px)}
@@ -49,22 +50,23 @@ a{color:inherit}
 .rail .v{writing-mode:vertical-rl;font-family:var(--display);font-size:15px;letter-spacing:.42em;color:var(--ink)}
 .rail .v small{display:block;font-family:var(--sans);font-size:9px;letter-spacing:.3em;color:var(--muted);margin-top:18px}
 .rail .mark{font-family:var(--display);font-size:20px;border:1px solid var(--line);width:34px;height:34px;display:grid;place-items:center}
-@media(max-width:760px){.rail{width:44px}.rail .v{font-size:12px}.rail .btm{display:none}}
-header.site{position:fixed;top:0;left:0;right:64px;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:20px clamp(20px,4vw,54px);mix-blend-mode:difference;text-shadow:0 1px 14px rgba(0,0,0,.55)}
+header.site{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:20px clamp(20px,4vw,54px);mix-blend-mode:difference;text-shadow:0 1px 14px rgba(0,0,0,.55)}
 header.site .name{font-family:var(--display);font-size:15px;letter-spacing:.34em}
 header.site nav{font-family:var(--sans);font-size:10px;letter-spacing:.28em;display:flex;gap:26px}
 header.site nav a{text-decoration:none;opacity:.85}
+header.site{transition:background .35s ease,border-color .35s ease}
+header.site.scrolled{mix-blend-mode:normal;background:rgba(10,9,8,.86);backdrop-filter:blur(9px);border-bottom:1px solid var(--line);text-shadow:none}
 header.site .hphone{font-family:var(--sans);font-size:11.5px;letter-spacing:.2em;color:var(--ink);text-decoration:none;border-left:1px solid rgba(233,227,213,.35);padding-left:26px;margin-left:2px;white-space:nowrap}
-@media(max-width:760px){header.site{right:44px}header.site nav{display:none}header.site .hphone{border-left:none;padding-left:0;font-size:11px}}
+@media(max-width:760px){header.site nav{display:none}header.site .hphone{border-left:none;padding-left:0;margin-left:0}}
 main{padding-right:64px}
-@media(max-width:760px){main{padding-right:44px}}
 /* HERO : scroll-scrubbed video — the camera draws closer */
 .hero{height:190svh;position:relative}
 .hero .stage{position:sticky;top:0;height:100svh;overflow:hidden;background:#060505}
+.hero picture{position:absolute;inset:0}
 .hero img.ph,.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:16% 50%}
 .hero video{opacity:0;transition:opacity 1s ease .1s}
 .hero video.live{opacity:1}
-@media(max-width:760px){.hero img.ph,.hero video{object-position:26% 50%}}
+@media(max-width:760px){.hero img.ph,.hero video{object-position:50% 50%}}
 .hero .shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,4,3,.58) 0%,rgba(5,4,3,.12) 34%,transparent 55%);pointer-events:none}
 .hero .ghost{position:absolute;top:6%;right:9%;writing-mode:vertical-rl;font-family:var(--display);font-size:clamp(90px,17vw,220px);letter-spacing:.08em;color:transparent;-webkit-text-stroke:1px rgba(233,227,213,.30);line-height:1;user-select:none}
 .hero .title{position:absolute;left:clamp(20px,5vw,72px);bottom:12%;max-width:660px}
@@ -151,6 +153,40 @@ section.ch{padding:clamp(96px,16svh,180px) clamp(20px,5vw,72px);position:relativ
 footer{padding:76px clamp(20px,5vw,72px) 56px;border-top:1px solid var(--line)}
 footer .brand{font-family:var(--display);font-size:20px;letter-spacing:.3em;margin-bottom:26px}
 footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-family:var(--sans);font-size:10px;letter-spacing:.22em;color:var(--muted)}
+
+@media(min-width:761px){header.site{right:64px}}
+/* ===== smartphone (the majority of visitors) ===== */
+@media(max-width:760px){
+  .rail{width:0;border-left:none;background:none;backdrop-filter:none}
+  .rail .mark,.rail .v{display:none}
+  .rail .prog{left:auto;right:0;width:2px}
+  header.site{padding:14px 20px}
+  header.site .name{font-size:14px;letter-spacing:.3em}
+  header.site .hphone{padding:12px 0;font-size:11.5px}
+  main{padding-right:0}
+  .hero{height:165svh}
+  .hero .ghost{font-size:13vw;right:5%;top:35%}
+  .hero .title{top:11%;bottom:auto}
+  .hero .shade{background:linear-gradient(to bottom,rgba(5,4,3,.66) 0%,rgba(5,4,3,.22) 34%,transparent 54%),linear-gradient(to top,rgba(5,4,3,.55) 0%,transparent 26%)}
+  .hero .title .en{font-size:9px;letter-spacing:.26em;line-height:2}
+  .hero .title .en .pc{display:none}
+  .hero .title h1{font-size:46px}
+  .hero .cue{letter-spacing:.26em;font-size:8.5px;gap:12px}
+  .statement .lbl{letter-spacing:.3em}
+  section.ch{padding:84px 22px;scroll-margin-top:56px}
+  .ch .no{font-size:9.5px;letter-spacing:.24em}
+  .ch h2{font-size:30px}
+  .kv{grid-template-columns:1fr}
+  .kv dt{padding:15px 0 3px;border-bottom:none}
+  .kv dd{padding:0 0 15px}
+  .maplink{display:inline-block;margin:4px 0 0;padding:8px 4px 8px 0}
+  .kv dd a.tel{display:inline-block;padding:6px 0}
+  .cards{gap:12px}
+  .card{flex:1 1 100%;padding:22px 24px}
+  .btn{display:block;text-align:center;padding:19px 16px}
+  footer{padding:64px 22px 48px}
+  footer .row{flex-direction:column;gap:9px;letter-spacing:.16em}
+}
 </style>
 </head>
 <body>
@@ -170,8 +206,11 @@ footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;f
   <!-- HERO : scroll-scrubbed video -->
   <div class="hero" id="heroSec">
     <div class="stage">
-      <img class="ph" src="/lp/redesign/p1/hero.webp" alt="暗い展示室で光を受ける李朝の箪笥" width="2352" height="1008" fetchpriority="high">
+      <picture><source media="(max-width: 760px)" srcset="/lp/redesign/p1/hero-m.webp" width="1080" height="1920"><img class="ph" src="/lp/redesign/p1/hero.webp" alt="暗い展示室で光を受ける李朝の箪笥" width="2352" height="1008" fetchpriority="high"></picture>
       <video id="heroVid" muted playsinline preload="auto" poster="/lp/redesign/p1/hero.webp" aria-label="スクロールに合わせて箪笥へ近づく映像">
+        <source media="(max-width: 760px)" src="/lp/redesign/p1/hero-m-av1.mp4" type="video/mp4; codecs=&quot;av01.0.05M.08&quot;">
+        <source media="(max-width: 760px)" src="/lp/redesign/p1/hero-m-hevc.mp4" type="video/mp4; codecs=&quot;hvc1.1.6.L93.B0&quot;">
+        <source media="(max-width: 760px)" src="/lp/redesign/p1/hero-m-h264.mp4" type="video/mp4">
         <source src="/lp/redesign/p1/hero-av1.mp4" type="video/mp4; codecs=&quot;av01.0.05M.08&quot;">
         <source src="/lp/redesign/p1/hero-hevc.mp4" type="video/mp4; codecs=&quot;hvc1.1.6.L93.B0&quot;">
         <source src="/lp/redesign/p1/hero-h264.mp4" type="video/mp4">
@@ -179,7 +218,7 @@ footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;f
       <div class="shade"></div>
       <div class="ghost" aria-hidden="true">古美術</div>
       <div class="title">
-        <div class="en">KAIHO JAPAN — ASIAN ANTIQUES, HACHIOJI TOKYO</div>
+        <div class="en">KAIHO JAPAN — ASIAN ANTIQUES<span class="pc">, HACHIOJI TOKYO</span></div>
         <h1>開豊ジャパン</h1>
         <p>時を経たものに、もう一度、光を当てる。<br>八王子の古美術商、開豊ジャパンです。</p>
       </div>
@@ -263,7 +302,7 @@ footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;f
 
   <footer>
     <div class="brand">開豊ジャパン</div>
-    <div class="row"><div>© KAIHO JAPAN Co., Ltd.</div><div>〒193-0935 東京都八王子市大船町142-6　042-667-7005</div><div>古物商許可 東京都公安委員会 第308770205133号</div></div>
+    <div class="row"><div>© KAIHO JAPAN Co., Ltd.</div><div>〒193-0935 東京都八王子市大船町142-6</div><div>電話 042-667-7005</div><div>古物商許可 東京都公安委員会 第308770205133号</div></div>
   </footer>
 </main>
 <script is:inline>
@@ -291,9 +330,13 @@ footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;f
     requestAnimationFrame(loop);
   }
   v.addEventListener('loadedmetadata', function(){ cur = 0; upd(); });
-  v.addEventListener('canplay', function(){ v.classList.add('live'); upd(); });
+  v.addEventListener('canplay', function(){ v.classList.add('live'); upd();
+    var pr = v.play(); if(pr && pr.then){ pr.then(function(){ v.pause(); }).catch(function(){}); } });
   v.addEventListener('seeked', function(){ seeking = false; });
   window.addEventListener('scroll', upd, {passive:true});
+  var hd = document.querySelector('header.site');
+  var onScr = function(){ if(hd) hd.classList.toggle('scrolled', window.scrollY > 30); };
+  window.addEventListener('scroll', onScr, {passive:true}); onScr();
   window.addEventListener('resize', upd);
   requestAnimationFrame(loop);
 })();
