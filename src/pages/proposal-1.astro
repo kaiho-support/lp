@@ -27,7 +27,7 @@ a{color:inherit}
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");}
 /* vertical rail */
 .rail{position:fixed;top:0;right:0;height:100svh;width:64px;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:28px 0;border-left:1px solid var(--line);background:rgba(11,10,9,.35);backdrop-filter:blur(2px)}
-.rail .prog{position:absolute;left:-1px;top:0;width:2px;height:100%;background:linear-gradient(#e9e3d5,rgba(233,227,213,.35));transform:scaleY(0);transform-origin:top}
+.rail .prog{position:absolute;left:-1px;top:0;width:3px;height:100%;background:linear-gradient(#f5efdd,rgba(233,227,213,.45));box-shadow:0 0 8px rgba(245,239,221,.35);transform:scaleY(0);transform-origin:top}
 @supports (animation-timeline: scroll()){
   @media (prefers-reduced-motion: no-preference){
     .rail .prog{animation:progFill linear both;animation-timeline:scroll(root)}
@@ -58,8 +58,8 @@ main{padding-right:64px}
     .hero .pool{animation:poolIn linear both;animation-timeline:scroll(root);animation-range:0 130svh}
   }
 }
-@keyframes heroLight{from{filter:brightness(.8) saturate(.88)}to{filter:brightness(1.05) saturate(.97)}}
-@keyframes beamIn{from{opacity:.45}to{opacity:.95}}
+@keyframes heroLight{from{filter:brightness(.8) saturate(.88)}to{filter:brightness(1.09) saturate(.98)}}
+@keyframes beamIn{from{opacity:.45}to{opacity:1}}
 @keyframes poolIn{from{opacity:.5}to{opacity:1}}
 .hero .ghost{position:absolute;top:6%;right:9%;writing-mode:vertical-rl;font-family:var(--display);font-size:clamp(90px,17vw,220px);letter-spacing:.08em;color:transparent;-webkit-text-stroke:1px rgba(233,227,213,.36);line-height:1;user-select:none}
 .hero .title{position:absolute;left:clamp(20px,5vw,72px);bottom:11%;max-width:640px}
