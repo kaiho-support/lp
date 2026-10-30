@@ -14,6 +14,9 @@
 <meta property="og:image" content="https://kaihojpn.com/lp/redesign/p1/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="/lp/favicon.svg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"AntiqueStore","name":"株式会社 開豊ジャパン","url":"https://kaihojpn.com/lp/","telephone":"+81-42-667-7005","email":"info@kaihojpn.com","address":{"@type":"PostalAddress","postalCode":"193-0935","addressRegion":"東京都","addressLocality":"八王子市","streetAddress":"大船町142-6","addressCountry":"JP"},"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"10:00","closes":"17:00"}}
+</script>
 <link rel="preload" as="font" type="font/woff2" crossorigin href="/lp/fonts/kaiho-display-500.woff2">
 <link rel="preload" as="image" href="/lp/redesign/p1/hero.webp">
 <style>
@@ -32,7 +35,7 @@ img{display:block;max-width:100%}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 ::selection{background:#e9e3d5;color:#12100d}
-.grain{position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:60;opacity:.055;
+.grain{position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:60;opacity:.05;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");}
 /* vertical rail */
 .rail{position:fixed;top:0;right:0;height:100svh;width:64px;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:28px 0;border-left:1px solid var(--line);background:rgba(11,10,9,.35);backdrop-filter:blur(2px)}
@@ -46,7 +49,7 @@ a{color:inherit}
 .rail .v{writing-mode:vertical-rl;font-family:var(--display);font-size:15px;letter-spacing:.42em;color:var(--ink)}
 .rail .v small{display:block;font-family:var(--sans);font-size:9px;letter-spacing:.3em;color:var(--muted);margin-top:18px}
 .rail .mark{font-family:var(--display);font-size:20px;border:1px solid var(--line);width:34px;height:34px;display:grid;place-items:center}
-@media(max-width:760px){.rail{width:44px}.rail .v{font-size:12px}.hero img.ph{object-position:31% 50%}}
+@media(max-width:760px){.rail{width:44px}.rail .v{font-size:12px}.rail .btm{display:none}}
 header.site{position:fixed;top:0;left:0;right:64px;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:20px clamp(20px,4vw,54px);mix-blend-mode:difference;text-shadow:0 1px 14px rgba(0,0,0,.55)}
 header.site .name{font-family:var(--display);font-size:15px;letter-spacing:.34em}
 header.site nav{font-family:var(--sans);font-size:10px;letter-spacing:.28em;display:flex;gap:26px}
@@ -54,28 +57,30 @@ header.site nav a{text-decoration:none;opacity:.85}
 @media(max-width:760px){header.site{right:44px}header.site nav{display:none}}
 main{padding-right:64px}
 @media(max-width:760px){main{padding-right:44px}}
-/* HERO : light changes, object still */
-.hero{height:230svh;position:relative}
-.hero .stage{position:sticky;top:0;height:100svh;overflow:hidden}
-.hero img.ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:16% 50%;filter:brightness(.8) saturate(.88)}
-.hero .beam{position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,244,214,.34) 0%,rgba(255,244,214,.10) 26%,transparent 52%);mix-blend-mode:screen;opacity:.45;transform-origin:top left}
-.hero .pool{position:absolute;inset:0;background:radial-gradient(ellipse 55% 42% at 30% 74%,rgba(255,240,205,.20),transparent 70%);opacity:.5}
-@supports (animation-timeline: scroll()){
-  @media (prefers-reduced-motion: no-preference){
-    .hero img.ph{animation:heroLight linear both;animation-timeline:scroll(root);animation-range:0 130svh}
-    .hero .beam{animation:beamIn linear both;animation-timeline:scroll(root);animation-range:0 130svh}
-    .hero .pool{animation:poolIn linear both;animation-timeline:scroll(root);animation-range:0 130svh}
-  }
+/* HERO : scroll-scrubbed video — the camera draws closer */
+.hero{height:280svh;position:relative}
+.hero .stage{position:sticky;top:0;height:100svh;overflow:hidden;background:#060505}
+.hero img.ph,.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:16% 50%}
+.hero video{opacity:0;transition:opacity 1s ease .1s}
+.hero video.live{opacity:1}
+@media(max-width:760px){.hero img.ph,.hero video{object-position:26% 50%}}
+.hero .shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,4,3,.58) 0%,rgba(5,4,3,.12) 34%,transparent 55%);pointer-events:none}
+.hero .ghost{position:absolute;top:6%;right:9%;writing-mode:vertical-rl;font-family:var(--display);font-size:clamp(90px,17vw,220px);letter-spacing:.08em;color:transparent;-webkit-text-stroke:1px rgba(233,227,213,.30);line-height:1;user-select:none}
+.hero .title{position:absolute;left:clamp(20px,5vw,72px);bottom:12%;max-width:660px}
+.hero .title .en{font-family:var(--sans);font-size:10px;letter-spacing:.4em;color:#cfc8b6;margin-bottom:18px;display:flex;align-items:center;gap:14px}
+.hero .title .en::before{content:"";width:26px;height:1px;background:rgba(233,227,213,.6)}
+.hero .title h1{font-family:var(--display);font-size:clamp(44px,6.4vw,88px);font-weight:500;letter-spacing:.13em;line-height:1.28;text-shadow:0 2px 30px rgba(0,0,0,.45)}
+.hero .title p{font-family:var(--display);margin-top:20px;font-size:clamp(14px,1.5vw,17px);color:#e3dccb;letter-spacing:.08em;line-height:2}
+.hero .cue{position:absolute;left:clamp(20px,5vw,72px);bottom:4.2%;font-family:var(--sans);font-size:9px;letter-spacing:.34em;color:#bdb5a2;display:flex;align-items:center;gap:16px}
+.hero .cue i{display:block;width:44px;height:1px;background:rgba(233,227,213,.35);position:relative;overflow:hidden}
+.hero .cue i::after{content:"";position:absolute;inset:0;background:#e9e3d5;transform:translateX(-100%);animation:cueSlide 2.6s cubic-bezier(.7,0,.3,1) infinite}
+@keyframes cueSlide{55%,100%{transform:translateX(100%)}}
+@media (prefers-reduced-motion: no-preference){
+  .hero .title .en,.hero .title h1,.hero .title p,.hero .cue{animation:riseIn 1.1s cubic-bezier(.2,.6,.2,1) both}
+  .hero .title h1{animation-delay:.18s}.hero .title p{animation-delay:.38s}.hero .cue{animation-delay:.7s}
 }
-@keyframes heroLight{from{filter:brightness(.8) saturate(.88)}to{filter:brightness(1.09) saturate(.98)}}
-@keyframes beamIn{from{opacity:.45}to{opacity:1}}
-@keyframes poolIn{from{opacity:.5}to{opacity:1}}
-.hero .ghost{position:absolute;top:6%;right:9%;writing-mode:vertical-rl;font-family:var(--display);font-size:clamp(90px,17vw,220px);letter-spacing:.08em;color:transparent;-webkit-text-stroke:1px rgba(233,227,213,.36);line-height:1;user-select:none}
-.hero .title{position:absolute;left:clamp(20px,5vw,72px);bottom:11%;max-width:640px}
-.hero .title .en{font-family:var(--sans);font-size:10px;letter-spacing:.4em;color:#c9c2b0;margin-bottom:16px}
-.hero .title h1{font-family:var(--display);font-size:clamp(44px,6.4vw,88px);font-weight:500;letter-spacing:.13em;line-height:1.28}
-.hero .title p{font-family:var(--display);margin-top:18px;font-size:clamp(14px,1.5vw,17px);color:#ddd6c6;letter-spacing:.08em}
-.hero .cue{position:absolute;left:clamp(20px,5vw,72px);bottom:4.5%;font-family:var(--sans);font-size:9px;letter-spacing:.34em;color:var(--muted)}
+@keyframes riseIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){.hero .cue i::after{animation:none}}
 /* reveal */
 @supports (animation-timeline: view()){
   @media (prefers-reduced-motion: no-preference){
@@ -86,57 +91,58 @@ main{padding-right:64px}
 @keyframes rvIn{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
 @keyframes unroll{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
 /* chapters */
-section.ch{padding:clamp(90px,15svh,170px) clamp(20px,5vw,72px);position:relative;scroll-margin-top:70px}
+section.ch{padding:clamp(96px,16svh,180px) clamp(20px,5vw,72px);position:relative;scroll-margin-top:70px}
 .well{position:absolute;inset:0;background:radial-gradient(ellipse 62% 46% at 50% 40%,rgba(240,230,205,.10),transparent 70%);pointer-events:none}
-.ch .head{position:relative;margin-bottom:clamp(36px,6svh,64px)}
-.ch .no{font-family:var(--sans);font-size:10px;letter-spacing:.4em;color:var(--muted)}
-.ch h2,.shop h2{font-family:var(--display);font-size:clamp(28px,3.6vw,44px);font-weight:500;letter-spacing:.16em;margin-top:12px}
-.ch h2 .side{writing-mode:vertical-rl;font-size:.42em;letter-spacing:.5em;color:var(--muted);margin-left:20px;vertical-align:top}
-.ch .lead{position:relative;max-width:560px;color:#d8d2c1;font-size:15.5px;letter-spacing:.05em}
-.ch figure{position:relative;max-width:880px}
+.ch .head{position:relative;margin-bottom:clamp(38px,6svh,66px)}
+.ch .no{font-family:var(--sans);font-size:10px;letter-spacing:.42em;color:var(--muted)}
+.ch h2,.shop h2{font-family:var(--display);font-size:clamp(29px,3.7vw,45px);font-weight:500;letter-spacing:.17em;margin-top:14px;line-height:1.5}
+.ch .head .rule{width:46px;height:1px;background:rgba(233,227,213,.4);margin-top:24px}
+.ch .lead{position:relative;max-width:560px;color:#dcd6c6;font-size:15.5px;letter-spacing:.06em;line-height:2.05}
+.ch figure{position:relative;max-width:900px}
 .ch figure img{width:100%;height:auto}
-.ch figcaption{font-family:var(--sans);font-size:10px;letter-spacing:.26em;color:var(--muted);margin-top:14px}
-.feather{-webkit-mask-image:radial-gradient(ellipse 76% 74% at 50% 50%,#000 58%,transparent 97%);mask-image:radial-gradient(ellipse 76% 74% at 50% 50%,#000 58%,transparent 97%)}
-/* porcelain : the one bright well — jar cut out, standing in light */
-.ch.bright{background:radial-gradient(ellipse 92% 82% at 50% 44%,#f2ecdd 0%,#d3ccb8 40%,#75705f 72%,var(--bg) 100%);color:#17150f}
-.ch.bright .no{color:#6d675a}.ch.bright .lead{color:#33302a}.ch.bright figcaption{color:#5d574c}
-.ch.bright figure{max-width:470px;margin:0 auto;text-align:center}
-.ch.bright figure img{filter:drop-shadow(0 34px 26px rgba(23,19,10,.42))}
-.ch.bright .head{text-align:center}.ch.bright .lead{margin:0 auto;text-align:center}
+.ch figcaption{font-family:var(--sans);font-size:10px;letter-spacing:.26em;color:var(--muted);margin-top:16px}
+/* porcelain : the one bright well */
+.ch.bright{background:radial-gradient(ellipse 94% 84% at 50% 34%,#f4eee0 0%,#d9d2be 38%,#8b8574 66%,#37342c 86%,var(--bg) 100%);color:#17150f}
+.ch.bright .no{color:#6d675a}.ch.bright .lead{color:#35322b}.ch.bright figcaption{color:#5d574c}
+.ch.bright .head{text-align:center}.ch.bright .head .rule{background:rgba(23,21,15,.45);margin-left:auto;margin-right:auto}
+.ch.bright .lead{margin:0 auto;text-align:center}
+.ch.bright figure{max-width:480px;margin:0 auto;text-align:center}
+.ch.bright figure .ground{position:absolute;left:50%;bottom:-10px;transform:translateX(-50%);width:74%;height:52px;background:radial-gradient(ellipse at center,rgba(26,22,13,.52),rgba(26,22,13,0) 68%);filter:blur(7px);z-index:0}
+.ch.bright figure img{position:relative;z-index:1;filter:drop-shadow(0 16px 20px rgba(23,19,10,.25))}
 .ch.bright :focus-visible{outline-color:#17150f}
 /* index list */
 .index{border-top:1px solid var(--line);position:relative}
-.index a{display:flex;align-items:baseline;gap:clamp(16px,3vw,40px);padding:20px 6px;border-bottom:1px solid var(--line);text-decoration:none;position:relative;overflow:hidden}
-.index a .n{font-family:var(--sans);font-size:11px;color:var(--muted);letter-spacing:.2em;min-width:34px}
+.index a{display:flex;align-items:baseline;gap:clamp(16px,3vw,40px);padding:22px 8px;border-bottom:1px solid var(--line);text-decoration:none;position:relative;overflow:hidden}
+.index a .n{font-family:var(--sans);font-size:10px;color:var(--muted);letter-spacing:.2em;min-width:34px}
 .index a .t{font-family:var(--display);font-size:clamp(19px,2.4vw,27px);letter-spacing:.22em;transition:transform .45s cubic-bezier(.6,0,.2,1)}
 .index a .e{margin-left:auto;font-family:var(--sans);font-size:9.5px;letter-spacing:.3em;color:var(--muted)}
 .index a::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 46% 120% at 24% 50%,rgba(245,236,210,.13),transparent 70%);opacity:0;transition:opacity .5s}
 .index a:hover::after{opacity:1}
-.index a:hover .t{transform:translateX(8px)}
+.index a:hover .t{transform:translateX(10px)}
 @media(max-width:760px){.index a .e{display:none}}
 /* shop */
 .shop{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,72px);align-items:center;position:relative}
 @media(max-width:760px){.shop{grid-template-columns:1fr}}
-.shop figure img{filter:drop-shadow(0 26px 30px rgba(0,0,0,.55))}
-.btn{display:inline-block;margin-top:30px;padding:16px 38px;border:1px solid rgba(233,227,213,.55);text-decoration:none;font-family:var(--sans);font-size:11.5px;letter-spacing:.3em;position:relative;overflow:hidden}
+.shop figure .ground{position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);width:80%;height:46px;background:radial-gradient(ellipse at center,rgba(0,0,0,.65),rgba(0,0,0,0) 68%);filter:blur(8px)}
+.shop figure img{position:relative;filter:drop-shadow(0 22px 26px rgba(0,0,0,.5))}
+.btn{display:inline-block;margin-top:32px;padding:17px 42px;border:1px solid rgba(233,227,213,.55);text-decoration:none;font-family:var(--sans);font-size:11.5px;letter-spacing:.32em;position:relative;overflow:hidden}
 .btn span{position:relative;z-index:1;transition:color .45s}
 .btn::before{content:"";position:absolute;inset:0;background:#e9e3d5;transform:scaleY(0);transform-origin:bottom;transition:transform .45s cubic-bezier(.7,0,.2,1)}
 .btn:hover::before{transform:scaleY(1)}.btn:hover span{color:#12100d}
 /* company / contact */
-.kv{display:grid;grid-template-columns:170px 1fr;row-gap:0;max-width:760px;position:relative}
-.kv dt,.kv dd{padding:15px 0;border-bottom:1px solid var(--line);font-size:14.5px;letter-spacing:.06em}
-.kv dt{color:var(--muted);font-family:var(--sans);font-size:11px;letter-spacing:.24em;padding-top:19px}
+.kv{display:grid;grid-template-columns:170px 1fr;max-width:760px;position:relative}
+.kv dt,.kv dd{padding:16px 0;border-bottom:1px solid var(--line);font-size:14.5px;letter-spacing:.06em}
+.kv dt{color:var(--muted);font-family:var(--sans);font-size:11px;letter-spacing:.24em;padding-top:20px}
 @media(max-width:760px){.kv{grid-template-columns:108px 1fr}}
 .cards{display:flex;gap:16px;flex-wrap:wrap;position:relative}
-.card{border:1px solid var(--line);padding:24px 28px;text-decoration:none;min-width:230px;transition:background .35s}
-.card:hover{background:rgba(233,227,213,.05)}
+.card{border:1px solid var(--line);padding:26px 30px;text-decoration:none;min-width:250px;transition:background .35s,transform .35s,border-color .35s}
+.card:hover{background:rgba(233,227,213,.05);transform:translateY(-2px);border-color:rgba(233,227,213,.38)}
 .card .k{font-family:var(--sans);font-size:9.5px;letter-spacing:.3em;color:var(--muted)}
-.card .v{font-size:19px;letter-spacing:.1em;margin-top:8px}
-footer{padding:70px clamp(20px,5vw,72px) 54px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-family:var(--sans);font-size:10px;letter-spacing:.22em;color:var(--muted)}
+.card .v{font-size:20px;letter-spacing:.1em;margin-top:9px}
+footer{padding:76px clamp(20px,5vw,72px) 56px;border-top:1px solid var(--line)}
+footer .brand{font-family:var(--display);font-size:20px;letter-spacing:.3em;margin-bottom:26px}
+footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-family:var(--sans);font-size:10px;letter-spacing:.22em;color:var(--muted)}
 </style>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"AntiqueStore","name":"株式会社 開豊ジャパン","url":"https://kaihojpn.com/lp/","telephone":"+81-42-667-7005","email":"info@kaihojpn.com","address":{"@type":"PostalAddress","postalCode":"193-0935","addressRegion":"東京都","addressLocality":"八王子市","streetAddress":"大船町142-6","addressCountry":"JP"},"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"10:00","closes":"17:00"}}
-</script>
 </head>
 <body>
 <div class="grain"></div>
@@ -144,46 +150,47 @@ footer{padding:70px clamp(20px,5vw,72px) 54px;border-top:1px solid var(--line);d
   <div class="prog"></div>
   <div class="mark">開</div>
   <div class="v">古美術<small>KAIHO JAPAN</small></div>
-  <div class="v" style="font-size:11px;color:var(--muted)">八王子</div>
+  <div class="v btm" style="font-size:11px;color:var(--muted)">八王子</div>
 </div>
 <header class="site">
   <div class="name">開豊ジャパン</div>
   <nav><a href="#items">取扱品目</a><a href="#shop">店舗</a><a href="#about">会社概要</a><a href="#contact">お問い合わせ</a></nav>
 </header>
 <main>
-  <!-- HERO -->
-  <div class="hero">
+  <!-- HERO : scroll-scrubbed video -->
+  <div class="hero" id="heroSec">
     <div class="stage">
-      <img class="ph" src="/lp/redesign/p1/hero.webp" alt="暗い展示室で光を受ける李朝の箪笥" width="1600" height="686" fetchpriority="high">
-      <div class="pool"></div><div class="beam"></div>
+      <img class="ph" src="/lp/redesign/p1/hero.webp" alt="暗い展示室で光を受ける李朝の箪笥" width="2352" height="1008" fetchpriority="high">
+      <video id="heroVid" muted playsinline preload="auto" poster="/lp/redesign/p1/hero.webp" src="/lp/redesign/p1/hero-pushin.mp4" aria-label="スクロールに合わせて箪笥へ近づく映像"></video>
+      <div class="shade"></div>
       <div class="ghost" aria-hidden="true">古美術</div>
       <div class="title">
         <div class="en">KAIHO JAPAN — ASIAN ANTIQUES, HACHIOJI TOKYO</div>
         <h1>開豊ジャパン</h1>
         <p>時を経たものに、もう一度、光を当てる。<br>八王子の古美術商、開豊ジャパンです。</p>
       </div>
-      <div class="cue">SCROLL — 光が満ちていきます</div>
+      <div class="cue"><span>SCROLL</span><i></i><span>箪笥に、近づいていきます</span></div>
     </div>
   </div>
 
   <!-- 理念 -->
   <section class="ch">
     <div class="well"></div>
-    <div class="head rv"><div class="no">CHAPTER 01</div><h2>理念<span class="side">こころざし</span></h2></div>
+    <div class="head rv"><div class="no">CHAPTER 01 — PHILOSOPHY</div><h2>理念</h2><div class="rule"></div></div>
     <p class="lead rv">品物は、人の手を渡りながら生き続けてきました。私たちの仕事は、その歩みを絶やさず、次の持ち主へ丁寧に橋渡しすること。李朝の家具、白磁、茶道具——東アジアの暮らしが育んだ美を、八王子からお届けします。</p>
   </section>
 
   <!-- 白磁：唯一の明るい井戸 -->
   <section class="ch bright">
-    <div class="head rv"><div class="no">CHAPTER 02 — 白磁</div><h2>白の静けさ</h2></div>
-    <figure class="unroll"><img src="/lp/redesign/p1/moonjar-cut.webp" alt="白磁の壺" width="1010" height="1041" loading="lazy" decoding="async"><figcaption>李朝白磁 — MOON JAR</figcaption></figure>
-    <p class="lead rv" style="margin-top:34px">歪みも、貫入も、そのままに。白磁の白は、何も足さないことで生まれる豊かさです。</p>
+    <div class="head rv"><div class="no">CHAPTER 02 — WHITE PORCELAIN</div><h2>白の静けさ</h2><div class="rule"></div></div>
+    <figure class="unroll"><div class="ground"></div><img src="/lp/redesign/p1/moonjar-cut2.webp" alt="白磁の壺" width="1010" height="1041" loading="lazy" decoding="async"><figcaption>李朝白磁 — MOON JAR</figcaption></figure>
+    <p class="lead rv" style="margin-top:36px">歪みも、貫入も、そのままに。白磁の白は、何も足さないことで生まれる豊かさです。</p>
   </section>
 
   <!-- 取扱品目 -->
   <section class="ch" id="items">
     <div class="well"></div>
-    <div class="head rv"><div class="no">CHAPTER 03</div><h2>取扱品目<span class="side">しなもの</span></h2></div>
+    <div class="head rv"><div class="no">CHAPTER 03 — COLLECTION</div><h2>取扱品目</h2><div class="rule"></div></div>
     <div class="index rv">
       <a href="#shop"><span class="n">01</span><span class="t">東洋美術</span><span class="e">ORIENTAL ART</span></a>
       <a href="#shop"><span class="n">02</span><span class="t">西洋美術</span><span class="e">WESTERN ART</span></a>
@@ -202,18 +209,18 @@ footer{padding:70px clamp(20px,5vw,72px) 54px;border-top:1px solid var(--line);d
   <!-- 茶道具 -->
   <section class="ch">
     <div class="well"></div>
-    <div class="head rv"><div class="no">CHAPTER 04 — 茶道具</div><h2>一服の道具</h2></div>
-    <figure class="unroll feather"><img src="/lp/redesign/p1/tea.webp" alt="茶道具の静物" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>茶道具 — TEA UTENSILS</figcaption></figure>
+    <div class="head rv"><div class="no">CHAPTER 04 — TEA UTENSILS</div><h2>一服の道具</h2><div class="rule"></div></div>
+    <figure class="unroll"><img src="/lp/redesign/p1/tea-cut.webp" alt="木の盆に載る鉄瓶、茶碗、茶筅" width="1920" height="1280" loading="lazy" decoding="async"><figcaption>茶道具 — TEA UTENSILS</figcaption></figure>
   </section>
 
   <!-- Shop -->
   <section class="ch" id="shop">
     <div class="well"></div>
     <div class="shop">
-      <figure class="unroll"><img src="/lp/redesign/p1/celadon-cut.webp" alt="青磁の花器" width="910" height="1203" loading="lazy" decoding="async"><figcaption style="font-family:var(--sans);font-size:10px;letter-spacing:.26em;color:var(--muted);margin-top:14px">青磁 — CELADON</figcaption></figure>
+      <figure class="unroll"><div class="ground"></div><img src="/lp/redesign/p1/celadon-cut.webp" alt="青磁の花器" width="910" height="1203" loading="lazy" decoding="async"><figcaption style="font-family:var(--sans);font-size:10px;letter-spacing:.26em;color:var(--muted);margin-top:16px">青磁 — CELADON</figcaption></figure>
       <div class="rv">
-        <div class="no" style="font-family:var(--sans);font-size:10px;letter-spacing:.4em;color:var(--muted)">SHOP</div>
-        <h2 style="font-size:clamp(26px,3.2vw,38px);letter-spacing:.16em;margin:12px 0 18px">Galleria 李朝</h2>
+        <div class="no" style="font-family:var(--sans);font-size:10px;letter-spacing:.42em;color:var(--muted)">SHOP — THE STORE</div>
+        <h2 style="font-size:clamp(27px,3.3vw,40px);letter-spacing:.16em;margin:14px 0 20px">Galleria 李朝</h2>
         <p class="lead">出品中の品々は、Yahoo!オークションの店舗「Galleria李朝」にてご覧いただけます。一点ものの性質上、掲載は随時入れ替わります。</p>
         <a class="btn" href="https://auctions.yahoo.co.jp/seller/2TBbYXSSF6rHaqSv7EVuJg1R9X8gD" target="_blank" rel="noopener"><span>出品一覧を見る</span></a>
       </div>
@@ -222,7 +229,7 @@ footer{padding:70px clamp(20px,5vw,72px) 54px;border-top:1px solid var(--line);d
 
   <!-- 会社概要 -->
   <section class="ch" id="about">
-    <div class="head rv"><div class="no">CHAPTER 05</div><h2>会社概要<span class="side">かいしゃ</span></h2></div>
+    <div class="head rv"><div class="no">CHAPTER 05 — COMPANY</div><h2>会社概要</h2><div class="rule"></div></div>
     <dl class="kv rv">
       <dt>会社名</dt><dd>株式会社 開豊ジャパン</dd>
       <dt>代表者</dt><dd>代表取締役　金 載文</dd>
@@ -235,19 +242,51 @@ footer{padding:70px clamp(20px,5vw,72px) 54px;border-top:1px solid var(--line);d
 
   <!-- お問い合わせ -->
   <section class="ch" id="contact">
-    <div class="head rv"><div class="no">CHAPTER 06</div><h2>お問い合わせ<span class="side">といあわせ</span></h2></div>
+    <div class="head rv"><div class="no">CHAPTER 06 — CONTACT</div><h2>お問い合わせ</h2><div class="rule"></div></div>
     <div class="cards rv">
       <a class="card" href="tel:0426677005"><div class="k">TELEPHONE</div><div class="v">042-667-7005</div></a>
       <a class="card" href="mailto:info@kaihojpn.com"><div class="k">EMAIL</div><div class="v">info@kaihojpn.com</div></a>
     </div>
     <!-- TODO: 先方作成のGoogleフォームURLが届いたら、ここにフォームへのボタンを追加する -->
-    <p class="lead rv" style="margin-top:26px;font-size:13.5px;color:var(--muted)">営業時間内（10:00–17:00）にご連絡ください。ご来店の際は事前にお電話いただけると確実です。</p>
+    <p class="lead rv" style="margin-top:28px;font-size:13.5px;color:var(--muted)">営業時間内（10:00–17:00）にご連絡ください。ご来店の際は事前にお電話いただけると確実です。</p>
   </section>
 
   <footer>
-    <div>© KAIHO JAPAN Co., Ltd.</div>
-    <div>古物商許可 東京都公安委員会 第308770205133号</div>
+    <div class="brand">開豊ジャパン</div>
+    <div class="row"><div>© KAIHO JAPAN Co., Ltd.</div><div>古物商許可 東京都公安委員会 第308770205133号</div></div>
   </footer>
 </main>
+<script is:inline>
+(function(){
+  var v = document.getElementById('heroVid');
+  var hero = document.getElementById('heroSec');
+  if(!v || !hero) return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){ v.remove(); return; }
+  var target = 0, cur = -1, seeking = false;
+  function upd(){
+    if(!v.duration) return;
+    var total = hero.offsetHeight - window.innerHeight;
+    var p = Math.min(1, Math.max(0, -hero.getBoundingClientRect().top / Math.max(1, total)));
+    target = p * v.duration;
+  }
+  function loop(){
+    if(v.duration && !seeking && cur >= 0){
+      var diff = target - cur;
+      if(Math.abs(diff) > 0.015){
+        cur += diff * 0.16;
+        seeking = true;
+        try{ v.currentTime = cur; }catch(e){ seeking = false; }
+      }
+    }
+    requestAnimationFrame(loop);
+  }
+  v.addEventListener('loadedmetadata', function(){ cur = 0; upd(); });
+  v.addEventListener('canplay', function(){ v.classList.add('live'); upd(); });
+  v.addEventListener('seeked', function(){ seeking = false; });
+  window.addEventListener('scroll', upd, {passive:true});
+  window.addEventListener('resize', upd);
+  requestAnimationFrame(loop);
+})();
+</script>
 </body>
 </html>
