@@ -6,7 +6,8 @@
 <meta name="robots" content="noindex,nofollow">
 <title>案1 改3 簡素化 — 開豊ジャパン</title>
 <link rel="preload" as="font" type="font/woff2" crossorigin href="/lp/fonts/kaiho-display-500.woff2">
-<link rel="preload" as="image" href="/lp/redesign/p1/hero.webp">
+<link rel="preload" as="image" href="/lp/redesign/p1/hero.webp" media="(min-width: 761px)">
+<link rel="preload" as="image" href="/lp/redesign/p1/hero-m.webp" media="(max-width: 760px)">
 <style>
 @font-face{font-family:'Kaiho Display';src:url('/lp/fonts/kaiho-display-500.woff2') format('woff2');font-weight:500;font-display:swap}
 :root{
@@ -47,10 +48,11 @@ main{padding-right:64px}
 /* HERO : scroll-scrubbed video — the camera draws closer */
 .hero{height:190svh;position:relative}
 .hero .stage{position:sticky;top:0;height:100svh;overflow:hidden;background:#060505}
+.hero picture{position:absolute;inset:0}
 .hero img.ph,.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:16% 50%}
 .hero video{opacity:0;transition:opacity 1s ease .1s}
 .hero video.live{opacity:1}
-@media(max-width:760px){.hero img.ph,.hero video{object-position:26% 50%}}
+@media(max-width:760px){.hero img.ph,.hero video{object-position:50% 50%}}
 .hero .shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,4,3,.58) 0%,rgba(5,4,3,.12) 34%,transparent 55%);pointer-events:none}
 .hero .ghost{position:absolute;top:6%;right:9%;writing-mode:vertical-rl;font-family:var(--display);font-size:clamp(90px,17vw,220px);letter-spacing:.08em;color:transparent;-webkit-text-stroke:1px rgba(233,227,213,.30);line-height:1;user-select:none}
 .hero .title{position:absolute;left:clamp(20px,5vw,72px);bottom:12%;max-width:660px}
@@ -149,8 +151,9 @@ footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;f
   header.site .hphone{padding:12px 0;font-size:11.5px}
   main{padding-right:0}
   .hero{height:165svh}
-  .hero .ghost{font-size:15vw;right:6%}
-  .hero .title{bottom:10.5%}
+  .hero .ghost{font-size:13vw;right:5%;top:35%}
+  .hero .title{top:11%;bottom:auto}
+  .hero .shade{background:linear-gradient(to bottom,rgba(5,4,3,.66) 0%,rgba(5,4,3,.22) 34%,transparent 54%),linear-gradient(to top,rgba(5,4,3,.55) 0%,transparent 26%)}
   .hero .title .en{font-size:9px;letter-spacing:.26em;line-height:2}
   .hero .title .en .pc{display:none}
   .hero .title h1{font-size:46px}
@@ -190,8 +193,11 @@ footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;f
   <!-- HERO : scroll-scrubbed video -->
   <div class="hero" id="heroSec">
     <div class="stage">
-      <img class="ph" src="/lp/redesign/p1/hero.webp" alt="暗い展示室で光を受ける李朝の箪笥" width="2352" height="1008" fetchpriority="high">
+      <picture><source media="(max-width: 760px)" srcset="/lp/redesign/p1/hero-m.webp" width="1080" height="1920"><img class="ph" src="/lp/redesign/p1/hero.webp" alt="暗い展示室で光を受ける李朝の箪笥" width="2352" height="1008" fetchpriority="high"></picture>
       <video id="heroVid" muted playsinline preload="auto" poster="/lp/redesign/p1/hero.webp" aria-label="スクロールに合わせて箪笥へ近づく映像">
+        <source media="(max-width: 760px)" src="/lp/redesign/p1/hero-m-av1.mp4" type="video/mp4; codecs=&quot;av01.0.05M.08&quot;">
+        <source media="(max-width: 760px)" src="/lp/redesign/p1/hero-m-hevc.mp4" type="video/mp4; codecs=&quot;hvc1.1.6.L93.B0&quot;">
+        <source media="(max-width: 760px)" src="/lp/redesign/p1/hero-m-h264.mp4" type="video/mp4">
         <source src="/lp/redesign/p1/hero-av1.mp4" type="video/mp4; codecs=&quot;av01.0.05M.08&quot;">
         <source src="/lp/redesign/p1/hero-hevc.mp4" type="video/mp4; codecs=&quot;hvc1.1.6.L93.B0&quot;">
         <source src="/lp/redesign/p1/hero-h264.mp4" type="video/mp4">
