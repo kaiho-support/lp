@@ -5,39 +5,52 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
 <title>案1 光の井戸 × 巻物 — 開豊ジャパン</title>
+<link rel="preload" as="font" type="font/woff2" crossorigin href="/lp/fonts/kaiho-display-500.woff2">
+<link rel="preload" as="image" href="/lp/redesign/p1/hero.webp">
 <style>
+@font-face{font-family:'Kaiho Display';src:url('/lp/fonts/kaiho-display-500.woff2') format('woff2');font-weight:500;font-display:swap}
 :root{
-  --bg:#0b0a09; --bg2:#12100d; --ink:#e9e3d5; --muted:#97907f; --line:rgba(233,227,213,.16);
+  --bg:#0b0a09; --ink:#e9e3d5; --muted:#a79e8b; --line:rgba(233,227,213,.16);
   --serif:"Didot","Bodoni MT","Bodoni 72","Hiragino Mincho ProN","Hiragino Mincho Pro","YuMincho","Yu Mincho","Noto Serif CJK JP",serif;
+  --display:'Kaiho Display',"Hiragino Mincho ProN","Hiragino Mincho Pro","YuMincho","Yu Mincho","Noto Serif CJK JP",serif;
   --sans:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic UI","Yu Gothic",sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
 body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.9;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{display:block;max-width:100%}
 a{color:inherit}
-/* grain */
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+::selection{background:#e9e3d5;color:#12100d}
 .grain{position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:60;opacity:.055;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");}
 /* vertical rail */
 .rail{position:fixed;top:0;right:0;height:100svh;width:64px;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:28px 0;border-left:1px solid var(--line);background:rgba(11,10,9,.35);backdrop-filter:blur(2px)}
-.rail .v{writing-mode:vertical-rl;font-size:15px;letter-spacing:.42em;color:var(--ink)}
+.rail .prog{position:absolute;left:-1px;top:0;width:2px;height:100%;background:linear-gradient(#e9e3d5,rgba(233,227,213,.35));transform:scaleY(0);transform-origin:top}
+@supports (animation-timeline: scroll()){
+  @media (prefers-reduced-motion: no-preference){
+    .rail .prog{animation:progFill linear both;animation-timeline:scroll(root)}
+  }
+}
+@keyframes progFill{to{transform:scaleY(1)}}
+.rail .v{writing-mode:vertical-rl;font-family:var(--display);font-size:15px;letter-spacing:.42em;color:var(--ink)}
 .rail .v small{display:block;font-family:var(--sans);font-size:9px;letter-spacing:.3em;color:var(--muted);margin-top:18px}
-.rail .mark{font-size:20px;border:1px solid var(--line);width:34px;height:34px;display:grid;place-items:center}
+.rail .mark{font-family:var(--display);font-size:20px;border:1px solid var(--line);width:34px;height:34px;display:grid;place-items:center}
 @media(max-width:760px){.rail{width:44px}.rail .v{font-size:12px}.hero img.ph{object-position:31% 50%}}
-header.site{position:fixed;top:0;left:0;right:64px;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:20px clamp(20px,4vw,54px);mix-blend-mode:difference}
-header.site .name{font-size:15px;letter-spacing:.34em}
+header.site{position:fixed;top:0;left:0;right:64px;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:20px clamp(20px,4vw,54px);mix-blend-mode:difference;text-shadow:0 1px 14px rgba(0,0,0,.55)}
+header.site .name{font-family:var(--display);font-size:15px;letter-spacing:.34em}
 header.site nav{font-family:var(--sans);font-size:10px;letter-spacing:.28em;display:flex;gap:26px}
-header.site nav a{text-decoration:none;opacity:.75}
+header.site nav a{text-decoration:none;opacity:.85}
 @media(max-width:760px){header.site{right:44px}header.site nav{display:none}}
 main{padding-right:64px}
 @media(max-width:760px){main{padding-right:44px}}
 /* HERO : light changes, object still */
 .hero{height:230svh;position:relative}
 .hero .stage{position:sticky;top:0;height:100svh;overflow:hidden}
-.hero img.ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:16% 50%;filter:brightness(.62) saturate(.85)}
-.hero .beam{position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,244,214,.34) 0%,rgba(255,244,214,.10) 26%,transparent 52%);mix-blend-mode:screen;opacity:.25;transform-origin:top left}
-.hero .pool{position:absolute;inset:0;background:radial-gradient(ellipse 55% 42% at 30% 74%,rgba(255,240,205,.20),transparent 70%);opacity:.3}
+.hero img.ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:16% 50%;filter:brightness(.8) saturate(.88)}
+.hero .beam{position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,244,214,.34) 0%,rgba(255,244,214,.10) 26%,transparent 52%);mix-blend-mode:screen;opacity:.45;transform-origin:top left}
+.hero .pool{position:absolute;inset:0;background:radial-gradient(ellipse 55% 42% at 30% 74%,rgba(255,240,205,.20),transparent 70%);opacity:.5}
 @supports (animation-timeline: scroll()){
   @media (prefers-reduced-motion: no-preference){
     .hero img.ph{animation:heroLight linear both;animation-timeline:scroll(root);animation-range:0 130svh}
@@ -45,14 +58,14 @@ main{padding-right:64px}
     .hero .pool{animation:poolIn linear both;animation-timeline:scroll(root);animation-range:0 130svh}
   }
 }
-@keyframes heroLight{from{filter:brightness(.62) saturate(.85)}to{filter:brightness(1.04) saturate(.96)}}
-@keyframes beamIn{to{opacity:.95}}
-@keyframes poolIn{to{opacity:1}}
-.hero .ghost{position:absolute;top:6%;right:9%;writing-mode:vertical-rl;font-size:clamp(90px,17vw,220px);letter-spacing:.08em;color:transparent;-webkit-text-stroke:1px rgba(233,227,213,.34);line-height:1;user-select:none}
+@keyframes heroLight{from{filter:brightness(.8) saturate(.88)}to{filter:brightness(1.05) saturate(.97)}}
+@keyframes beamIn{from{opacity:.45}to{opacity:.95}}
+@keyframes poolIn{from{opacity:.5}to{opacity:1}}
+.hero .ghost{position:absolute;top:6%;right:9%;writing-mode:vertical-rl;font-family:var(--display);font-size:clamp(90px,17vw,220px);letter-spacing:.08em;color:transparent;-webkit-text-stroke:1px rgba(233,227,213,.36);line-height:1;user-select:none}
 .hero .title{position:absolute;left:clamp(20px,5vw,72px);bottom:11%;max-width:640px}
-.hero .title .en{font-family:var(--sans);font-size:10px;letter-spacing:.4em;color:var(--muted);margin-bottom:16px}
-.hero .title h1{font-size:clamp(40px,6.4vw,84px);font-weight:500;letter-spacing:.14em;line-height:1.25}
-.hero .title p{margin-top:18px;font-size:clamp(14px,1.5vw,17px);color:#cfc8b8;letter-spacing:.08em}
+.hero .title .en{font-family:var(--sans);font-size:10px;letter-spacing:.4em;color:#c9c2b0;margin-bottom:16px}
+.hero .title h1{font-family:var(--display);font-size:clamp(44px,6.4vw,88px);font-weight:500;letter-spacing:.13em;line-height:1.28}
+.hero .title p{font-family:var(--display);margin-top:18px;font-size:clamp(14px,1.5vw,17px);color:#ddd6c6;letter-spacing:.08em}
 .hero .cue{position:absolute;left:clamp(20px,5vw,72px);bottom:4.5%;font-family:var(--sans);font-size:9px;letter-spacing:.34em;color:var(--muted)}
 /* reveal */
 @supports (animation-timeline: view()){
@@ -64,33 +77,38 @@ main{padding-right:64px}
 @keyframes rvIn{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
 @keyframes unroll{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
 /* chapters */
-section.ch{padding:clamp(90px,15svh,170px) clamp(20px,5vw,72px);position:relative}
+section.ch{padding:clamp(90px,15svh,170px) clamp(20px,5vw,72px);position:relative;scroll-margin-top:70px}
 .well{position:absolute;inset:0;background:radial-gradient(ellipse 62% 46% at 50% 40%,rgba(240,230,205,.10),transparent 70%);pointer-events:none}
 .ch .head{position:relative;margin-bottom:clamp(36px,6svh,64px)}
 .ch .no{font-family:var(--sans);font-size:10px;letter-spacing:.4em;color:var(--muted)}
-.ch h2{font-size:clamp(28px,3.6vw,44px);font-weight:500;letter-spacing:.16em;margin-top:12px}
+.ch h2,.shop h2{font-family:var(--display);font-size:clamp(28px,3.6vw,44px);font-weight:500;letter-spacing:.16em;margin-top:12px}
 .ch h2 .side{writing-mode:vertical-rl;font-size:.42em;letter-spacing:.5em;color:var(--muted);margin-left:20px;vertical-align:top}
-.ch .lead{position:relative;max-width:560px;color:#d5cfc0;font-size:15.5px;letter-spacing:.05em}
+.ch .lead{position:relative;max-width:560px;color:#d8d2c1;font-size:15.5px;letter-spacing:.05em}
 .ch figure{position:relative;max-width:880px}
 .ch figure img{width:100%;height:auto}
 .ch figcaption{font-family:var(--sans);font-size:10px;letter-spacing:.26em;color:var(--muted);margin-top:14px}
-/* porcelain : the one bright well */
-.ch.bright{background:radial-gradient(ellipse 90% 80% at 50% 46%,#e6dfcf 0%,#b9b2a1 46%,#57534a 78%,var(--bg) 100%);color:#17150f}
-.ch.bright .no{color:#6d675a}.ch.bright .lead{color:#33302a}.ch.bright figcaption{color:#6d675a}
-.ch.bright figure{max-width:520px;margin:0 auto}
+.feather{-webkit-mask-image:radial-gradient(ellipse 76% 74% at 50% 50%,#000 58%,transparent 97%);mask-image:radial-gradient(ellipse 76% 74% at 50% 50%,#000 58%,transparent 97%)}
+/* porcelain : the one bright well — jar cut out, standing in light */
+.ch.bright{background:radial-gradient(ellipse 92% 82% at 50% 44%,#f2ecdd 0%,#d3ccb8 40%,#75705f 72%,var(--bg) 100%);color:#17150f}
+.ch.bright .no{color:#6d675a}.ch.bright .lead{color:#33302a}.ch.bright figcaption{color:#5d574c}
+.ch.bright figure{max-width:470px;margin:0 auto;text-align:center}
+.ch.bright figure img{filter:drop-shadow(0 34px 26px rgba(23,19,10,.42))}
 .ch.bright .head{text-align:center}.ch.bright .lead{margin:0 auto;text-align:center}
+.ch.bright :focus-visible{outline-color:#17150f}
 /* index list */
 .index{border-top:1px solid var(--line);position:relative}
 .index a{display:flex;align-items:baseline;gap:clamp(16px,3vw,40px);padding:20px 6px;border-bottom:1px solid var(--line);text-decoration:none;position:relative;overflow:hidden}
 .index a .n{font-family:var(--sans);font-size:11px;color:var(--muted);letter-spacing:.2em;min-width:34px}
-.index a .t{font-size:clamp(19px,2.4vw,27px);letter-spacing:.22em}
+.index a .t{font-family:var(--display);font-size:clamp(19px,2.4vw,27px);letter-spacing:.22em;transition:transform .45s cubic-bezier(.6,0,.2,1)}
 .index a .e{margin-left:auto;font-family:var(--sans);font-size:9.5px;letter-spacing:.3em;color:var(--muted)}
 .index a::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 46% 120% at 24% 50%,rgba(245,236,210,.13),transparent 70%);opacity:0;transition:opacity .5s}
 .index a:hover::after{opacity:1}
+.index a:hover .t{transform:translateX(8px)}
 @media(max-width:760px){.index a .e{display:none}}
 /* shop */
 .shop{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,72px);align-items:center;position:relative}
 @media(max-width:760px){.shop{grid-template-columns:1fr}}
+.shop figure img{filter:drop-shadow(0 26px 30px rgba(0,0,0,.55))}
 .btn{display:inline-block;margin-top:30px;padding:16px 38px;border:1px solid rgba(233,227,213,.55);text-decoration:none;font-family:var(--sans);font-size:11.5px;letter-spacing:.3em;position:relative;overflow:hidden}
 .btn span{position:relative;z-index:1;transition:color .45s}
 .btn::before{content:"";position:absolute;inset:0;background:#e9e3d5;transform:scaleY(0);transform-origin:bottom;transition:transform .45s cubic-bezier(.7,0,.2,1)}
@@ -101,7 +119,8 @@ section.ch{padding:clamp(90px,15svh,170px) clamp(20px,5vw,72px);position:relativ
 .kv dt{color:var(--muted);font-family:var(--sans);font-size:11px;letter-spacing:.24em;padding-top:19px}
 @media(max-width:760px){.kv{grid-template-columns:108px 1fr}}
 .cards{display:flex;gap:16px;flex-wrap:wrap;position:relative}
-.card{border:1px solid var(--line);padding:24px 28px;text-decoration:none;min-width:230px}
+.card{border:1px solid var(--line);padding:24px 28px;text-decoration:none;min-width:230px;transition:background .35s}
+.card:hover{background:rgba(233,227,213,.05)}
 .card .k{font-family:var(--sans);font-size:9.5px;letter-spacing:.3em;color:var(--muted)}
 .card .v{font-size:19px;letter-spacing:.1em;margin-top:8px}
 footer{padding:70px clamp(20px,5vw,72px) 54px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-family:var(--sans);font-size:10px;letter-spacing:.22em;color:var(--muted)}
@@ -111,6 +130,7 @@ footer{padding:70px clamp(20px,5vw,72px) 54px;border-top:1px solid var(--line);d
 <body>
 <div class="grain"></div>
 <div class="rail" aria-hidden="true">
+  <div class="prog"></div>
   <div class="mark">開</div>
   <div class="v">古美術<small>KAIHO JAPAN</small></div>
   <div class="v" style="font-size:11px;color:var(--muted)">八王子</div>
@@ -123,7 +143,7 @@ footer{padding:70px clamp(20px,5vw,72px) 54px;border-top:1px solid var(--line);d
   <!-- HERO -->
   <div class="hero">
     <div class="stage">
-      <img class="ph" src="/lp/redesign/p1/hero.webp" alt="暗い展示室で光を受ける李朝の箪笥">
+      <img class="ph" src="/lp/redesign/p1/hero.webp" alt="暗い展示室で光を受ける李朝の箪笥" width="1600" height="686" fetchpriority="high">
       <div class="pool"></div><div class="beam"></div>
       <div class="ghost" aria-hidden="true">古美術</div>
       <div class="title">
@@ -145,7 +165,7 @@ footer{padding:70px clamp(20px,5vw,72px) 54px;border-top:1px solid var(--line);d
   <!-- 白磁：唯一の明るい井戸 -->
   <section class="ch bright">
     <div class="head rv"><div class="no">CHAPTER 02 — 白磁</div><h2>白の静けさ</h2></div>
-    <figure class="unroll"><img src="/lp/redesign/p1/moonjar.webp" alt="白磁の壺"><figcaption>李朝白磁 — MOON JAR</figcaption></figure>
+    <figure class="unroll"><img src="/lp/redesign/p1/moonjar-cut.webp" alt="白磁の壺" width="1010" height="1041" loading="lazy" decoding="async"><figcaption>李朝白磁 — MOON JAR</figcaption></figure>
     <p class="lead rv" style="margin-top:34px">歪みも、貫入も、そのままに。白磁の白は、何も足さないことで生まれる豊かさです。</p>
   </section>
 
@@ -172,14 +192,14 @@ footer{padding:70px clamp(20px,5vw,72px) 54px;border-top:1px solid var(--line);d
   <section class="ch">
     <div class="well"></div>
     <div class="head rv"><div class="no">CHAPTER 04 — 茶道具</div><h2>一服の道具</h2></div>
-    <figure class="unroll"><img src="/lp/redesign/p1/tea.webp" alt="茶道具の静物"><figcaption>茶道具 — TEA UTENSILS</figcaption></figure>
+    <figure class="unroll feather"><img src="/lp/redesign/p1/tea.webp" alt="茶道具の静物" width="1600" height="1066" loading="lazy" decoding="async"><figcaption>茶道具 — TEA UTENSILS</figcaption></figure>
   </section>
 
   <!-- Shop -->
   <section class="ch" id="shop">
     <div class="well"></div>
     <div class="shop">
-      <figure class="unroll"><img src="/lp/redesign/p1/celadon.webp" alt="青磁の花器"><figcaption style="font-family:var(--sans);font-size:10px;letter-spacing:.26em;color:var(--muted);margin-top:14px">青磁 — CELADON</figcaption></figure>
+      <figure class="unroll"><img src="/lp/redesign/p1/celadon-cut.webp" alt="青磁の花器" width="910" height="1203" loading="lazy" decoding="async"><figcaption style="font-family:var(--sans);font-size:10px;letter-spacing:.26em;color:var(--muted);margin-top:14px">青磁 — CELADON</figcaption></figure>
       <div class="rv">
         <div class="no" style="font-family:var(--sans);font-size:10px;letter-spacing:.4em;color:var(--muted)">SHOP</div>
         <h2 style="font-size:clamp(26px,3.2vw,38px);letter-spacing:.16em;margin:12px 0 18px">Galleria 李朝</h2>
@@ -217,6 +237,6 @@ footer{padding:70px clamp(20px,5vw,72px) 54px;border-top:1px solid var(--line);d
     <div>古物商許可 東京都公安委員会 第308770205133号</div>
   </footer>
 </main>
-<div class="tag">案1 — 光の井戸 × 巻物</div>
+<div class="tag">案1 改 — 光の井戸 × 巻物</div>
 </body>
 </html>
