@@ -171,7 +171,11 @@ footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;f
   <div class="hero" id="heroSec">
     <div class="stage">
       <img class="ph" src="/lp/redesign/p1/hero.webp" alt="暗い展示室で光を受ける李朝の箪笥" width="2352" height="1008" fetchpriority="high">
-      <video id="heroVid" muted playsinline preload="auto" poster="/lp/redesign/p1/hero.webp" src="/lp/redesign/p1/hero-pushin-hq.mp4" aria-label="スクロールに合わせて箪笥へ近づく映像"></video>
+      <video id="heroVid" muted playsinline preload="auto" poster="/lp/redesign/p1/hero.webp" aria-label="スクロールに合わせて箪笥へ近づく映像">
+        <source src="/lp/redesign/p1/hero-av1.mp4" type="video/mp4; codecs=&quot;av01.0.05M.08&quot;">
+        <source src="/lp/redesign/p1/hero-hevc.mp4" type="video/mp4; codecs=&quot;hvc1.1.6.L93.B0&quot;">
+        <source src="/lp/redesign/p1/hero-h264.mp4" type="video/mp4">
+      </video>
       <div class="shade"></div>
       <div class="ghost" aria-hidden="true">古美術</div>
       <div class="title">
