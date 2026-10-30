@@ -28,23 +28,18 @@ a{color:inherit}
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");}
 /* vertical rail */
 .rail{position:fixed;top:0;right:0;height:100svh;width:64px;z-index:50;display:flex;flex-direction:column;align-items:center;padding:24px 0 26px;
-  background:linear-gradient(90deg,#0a0a0b 0%,#131416 34%,#1d1e20 52%,#111214 74%,#080808 100%);box-shadow:inset 0 0 22px rgba(0,0,0,.6)}
-.rail::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
-  background:repeating-linear-gradient(0deg,rgba(255,255,255,.022) 0 1px,transparent 1px 3px)}
-.rail::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;z-index:3;
-  background:linear-gradient(to bottom,#101112 0%,#3f4347 16%,#9ba1a6 38%,#dde1e4 50%,#848a8f 62%,#3a3e42 84%,#101112 100%)}
-.rail .prog{position:absolute;left:0;top:0;width:2px;height:100%;z-index:4;background:linear-gradient(#f4f6f7,rgba(198,204,209,.5));box-shadow:0 0 9px rgba(232,236,239,.45);transform:scaleY(0);transform-origin:top}
+  border-left:1px solid var(--line);background:rgba(11,10,9,.35);backdrop-filter:blur(2px)}
+.rail .prog{position:absolute;left:-1px;top:0;width:3px;height:100%;background:linear-gradient(#f5efdd,rgba(233,227,213,.45));box-shadow:0 0 8px rgba(245,239,221,.35);transform:scaleY(0);transform-origin:top}
 .rail a{text-decoration:none}
-.rail .mark{font-family:var(--display);font-size:19px;color:#e8e9ea;width:35px;height:35px;display:grid;place-items:center;flex:none;
-  border:1px solid transparent;background:linear-gradient(#151618,#151618) padding-box,linear-gradient(155deg,#5a5f64,#e8ecee 45%,#3f4347 90%) border-box;
-  box-shadow:0 2px 8px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.08)}
+.rail .mark{font-family:var(--display);font-size:19px;color:var(--ink);width:35px;height:35px;display:grid;place-items:center;flex:none;
+  border:1px solid var(--line)}
 .rail nav{display:flex;flex-direction:column;gap:6px;margin-top:5.5svh;position:relative;z-index:2}
-.rail nav a{display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 0 8px;width:64px;color:#b9bdc0;opacity:.62;transition:opacity .3s,color .3s}
-.rail nav a svg{width:21px;height:21px;fill:none;stroke:url(#metalGrad);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 1px rgba(0,0,0,.65))}
-.rail nav a i{font-style:normal;font-family:var(--sans);font-size:8px;letter-spacing:.14em;color:#8f959a}
+.rail nav a{display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 0 8px;width:64px;color:var(--muted);opacity:.75;transition:opacity .3s,color .3s}
+.rail nav a svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.rail nav a i{font-style:normal;font-family:var(--sans);font-size:8px;letter-spacing:.14em;color:var(--muted)}
 .rail nav a:hover{opacity:1}
-.rail nav a.active{opacity:1;color:#f2f4f5}
-.rail nav a.active i{color:#dde1e4}
+.rail nav a.active{opacity:1;color:var(--ink)}
+.rail nav a.active i{color:var(--ink)}
 @supports (animation-timeline: scroll()){
   @media (prefers-reduced-motion: no-preference){
     .rail .prog{animation:progFill linear both;animation-timeline:scroll(root)}
@@ -190,10 +185,6 @@ footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;f
 </head>
 <body>
 <div class="grain"></div>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-<linearGradient id="metalGrad" x1="0" y1="0" x2="1" y2="1">
-  <stop offset="0" stop-color="#555a5f"/><stop offset=".45" stop-color="#e8ecee"/><stop offset=".7" stop-color="#9ba1a6"/><stop offset="1" stop-color="#3f4347"/>
-</linearGradient></defs></svg>
 <div class="rail">
   <div class="prog"></div>
   <a class="mark" href="#heroSec" aria-label="トップへ">開</a>
