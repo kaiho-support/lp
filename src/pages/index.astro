@@ -60,10 +60,7 @@ a{color:inherit}
 @keyframes progFill{to{transform:scaleY(1)}}
 header.site{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:20px clamp(20px,4vw,54px);mix-blend-mode:difference;text-shadow:0 1px 14px rgba(0,0,0,.55)}
 header.site .name{font-family:var(--display);font-size:15px;letter-spacing:.34em}
-header.site{transition:background .35s ease,border-color .35s ease}
-header.site.scrolled{mix-blend-mode:normal;background:rgba(10,9,8,.86);backdrop-filter:blur(9px);border-bottom:1px solid var(--line);text-shadow:none}
-header.site .hphone{font-family:var(--sans);font-size:11.5px;letter-spacing:.2em;color:var(--ink);text-decoration:none;border-left:1px solid rgba(233,227,213,.35);padding-left:26px;margin-left:2px;white-space:nowrap}
-@media(max-width:760px){header.site{right:38px}header.site .hphone{border-left:none;padding-left:0;margin-left:0}}
+@media(max-width:760px){header.site{right:38px}}
 main{padding-right:64px}
 /* HERO : scroll-scrubbed video — the camera draws closer */
 .hero{height:190svh;position:relative}
@@ -168,8 +165,7 @@ footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;f
   .rail nav a i{font-size:7px;letter-spacing:.08em}
   header.site{padding:14px 20px}
   header.site .name{font-size:14px;letter-spacing:.3em}
-  header.site .hphone{padding:12px 0;font-size:11.5px}
-  main{padding-right:38px}
+    main{padding-right:38px}
   .hero{height:165svh}
     .hero .title{top:11%;bottom:auto}
   .hero .shade{background:linear-gradient(to bottom,rgba(5,4,3,.66) 0%,rgba(5,4,3,.22) 34%,transparent 54%),linear-gradient(to top,rgba(5,4,3,.55) 0%,transparent 26%)}
@@ -208,7 +204,6 @@ footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;f
 </div>
 <header class="site">
   <div class="name">開豊ジャパン</div>
-  <a class="hphone" href="tel:0426677005">042-667-7005</a>
 </header>
 <main>
   <!-- HERO : scroll-scrubbed video -->
@@ -316,30 +311,38 @@ footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;f
 (function(){
   var v = document.getElementById('heroVid');
   var hero = document.getElementById('heroSec');
+  var stage = hero ? hero.querySelector('.stage') : null;
   if(!v || !hero) return;
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){ v.remove(); return; }
   var target = 0, cur = -1, seeking = false;
   function upd(){
-    if(!v.duration) return;
-    var total = hero.offsetHeight - window.innerHeight;
+    if(!v.duration || !stage) return;
+    var total = hero.offsetHeight - stage.offsetHeight;
     var p = Math.min(1, Math.max(0, -hero.getBoundingClientRect().top / Math.max(1, total)));
-    target = p * v.duration;
+    target = p * Math.max(0, v.duration - 0.06);
+  }
+  var seekWatch = null;
+  function armWatch(){
+    if(seekWatch) clearTimeout(seekWatch);
+    seekWatch = setTimeout(function(){ seeking = false; }, 140);
   }
   function loop(){
     if(v.duration && !seeking && cur >= 0){
+      if(!v.paused && !v.ended) v.pause();
       var diff = target - cur;
       if(Math.abs(diff) > 0.015){
         cur += diff * 0.16;
         seeking = true;
+        armWatch();
         try{ v.currentTime = cur; }catch(e){ seeking = false; }
       }
     }
     requestAnimationFrame(loop);
   }
   v.addEventListener('loadedmetadata', function(){ cur = 0; upd(); });
-  v.addEventListener('canplay', function(){ v.classList.add('live'); upd();
-    var pr = v.play(); if(pr && pr.then){ pr.then(function(){ v.pause(); }).catch(function(){}); } });
-  v.addEventListener('seeked', function(){ seeking = false; });
+  v.addEventListener('canplay', function(){ v.classList.add('live'); upd(); });
+  v.addEventListener('seeked', function(){ seeking = false; if(seekWatch) clearTimeout(seekWatch); });
+  v.addEventListener('ended', function(){ cur = Math.max(0, v.duration - 0.06); try{ v.currentTime = cur; }catch(e){} });
   window.addEventListener('scroll', upd, {passive:true});
   var navLinks = document.querySelectorAll('.rail nav a[data-sec]');
   if('IntersectionObserver' in window && navLinks.length){
@@ -352,9 +355,6 @@ footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;f
     }, {rootMargin:'-38% 0px -52% 0px'});
     ['about','items','shop','contact'].forEach(function(id){ var el = document.getElementById(id); if(el) io.observe(el); });
   }
-  var hd = document.querySelector('header.site');
-  var onScr = function(){ if(hd) hd.classList.toggle('scrolled', window.scrollY > 30); };
-  window.addEventListener('scroll', onScr, {passive:true}); onScr();
   window.addEventListener('resize', upd);
   requestAnimationFrame(loop);
 })();
