@@ -329,8 +329,7 @@ footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;f
     requestAnimationFrame(loop);
   }
   v.addEventListener('loadedmetadata', function(){ cur = 0; upd(); });
-  v.addEventListener('canplay', function(){ v.classList.add('live'); upd();
-    var pr = v.play(); if(pr && pr.then){ pr.then(function(){ v.pause(); }).catch(function(){}); } });
+  v.addEventListener('canplay', function(){ v.classList.add('live'); upd(); });
   v.addEventListener('seeked', function(){ seeking = false; if(seekWatch) clearTimeout(seekWatch); });
   v.addEventListener('ended', function(){ cur = Math.max(0, v.duration - 0.06); try{ v.currentTime = cur; }catch(e){} });
   window.addEventListener('scroll', upd, {passive:true});
